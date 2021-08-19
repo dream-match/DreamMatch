@@ -71,8 +71,8 @@ export default {
       },
       firestore: {
         enablePersistence: true,
-        emulatorPort: process.env.NODE_ENV === 'development' && useE ? 8080 : undefined,
-        emulatorHost: "localhost"
+        // emulatorPort: process.env.NODE_ENV === 'development' && useE ? 8080 : undefined,
+        //  emulatorHost: "localhost"
       },
       storage: true
     }
