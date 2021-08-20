@@ -26,7 +26,6 @@ export const mutations = {
 export const actions = {
     async registerByMail({ commit }, { mail, pass }) {
         try {
-            commit("setRegisterStep", 1)
             const userCredential = await this.$fire.auth.createUserWithEmailAndPassword(mail, pass)
             const { uid, photoURL, email, displayName } = userCredential.user
             commit("setUser", { uid, photoURL, email, name: displayName })
@@ -39,7 +38,6 @@ export const actions = {
     },
     async registerByGoogle({ commit }) {
         try {
-            commit("setRegisterStep", 1)
             const provider = new this.$fireModule.auth.GoogleAuthProvider();
             const userCredential = await this.$fire.auth.signInWithPopup(provider);
             const { uid, photoURL, email, displayName } = userCredential.user
@@ -52,11 +50,10 @@ export const actions = {
     },
     async registerProf({ commit }, input) {
         try {
-            commit("setRegisterStep", 1)
             const user = this.$fire.auth.currentUser;
             let uploadedImgUrl = ""
             if (input.imageFile) {
-                const snapshot = await this.$fire.storage.ref().child(`images/profile/${user.uid}`).put(input.imageFile)
+                const snapshot = await this.$fire.storage.ref().child(`/images/profile/${user.uid}`).put(input.imageFile)
                 uploadedImgUrl = await snapshot.ref.getDownloadURL();
             }
             await user.updateProfile({

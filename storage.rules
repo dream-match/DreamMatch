@@ -7,7 +7,7 @@ service firebase.storage {
     function isUserAuthenticated(userId) { 
         return isAuthenticated() && userId == request.auth.uid;
     }
-    match /imgaes/profile/${userId} {
+    match /images/profile/{userId} {
       allow read, write: if isUserAuthenticated(userId);
       allow read:if true;
     }
