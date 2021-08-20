@@ -39,14 +39,6 @@
                   hint="外部のユーザーに公開します"
                   prepend-icon="mdi-account"
                 />
-
-                <v-textarea
-                  v-model="input.prof"
-                  label="プロフィール"
-                  prepend-icon="mdi-comment"
-                  placeholder="ギターを練習しています"
-                  hint="自分について短くまとめましょう"
-                />
                 <v-combobox
                   v-model="input.skill"
                   :items="items"
@@ -69,6 +61,13 @@
                     </v-chip>
                   </template>
                 </v-combobox>
+                <v-textarea
+                  v-model="input.prof"
+                  label="プロフィール"
+                  prepend-icon="mdi-comment"
+                  placeholder="ギターを練習しています"
+                  hint="自分について短くまとめましょう"
+                />
               </v-form>
             </v-card-text>
             <v-card-actions>
