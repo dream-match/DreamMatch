@@ -8,18 +8,17 @@ service cloud.firestore {
         return isAuthenticated() && userId == request.auth.uid;
     }
     function isValidUser(user) {
-        return  'createdAt' in user && user.createdAt is timestamps;
-        && 'email' in user && user.email is string;
-        && 'userId' in user && user.userId is string;
+        return  'createdAt' in user 
+        && 'email' in user && user.email is string
+        && 'uid' in user && user.uid is string
         && "name" in user && user.name is string;
     }
- 　 match /users/{userId} {
+   match /users/{userId} {
         allow update: if isUserAuthenticated(userId); 
         allow create: if isAuthenticated()
         && isValidUser(request.resource.data)
-        && request.resource.data.createdAt == request.time 
-        && request.resource.data.userId == userId;
-        allow read if isAuthenticated()
+        && isUserAuthenticated(userId);
+        allow read: if isAuthenticated()
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-0">
+  <v-card class="ma-0" flat>
     <v-card-title class="text-sm-h5 text-lg-h4 font-weight-bold">
       {{ title }}
     </v-card-title>
@@ -75,7 +75,7 @@ export default {
 
     passRules: [
       (v) => !!v || '',
-      (v) => /^[\w-]{6,72}$/.test(v) || '6文字以上にしてください',
+      (v) => v.length >= 6 || '6文字以上にしてください',
     ],
     mailrules: [(v) => !!v || '', (v) => /.+@.+\..+/.test(v) || ''],
     input: { mail: '', pass: '' },
@@ -100,6 +100,7 @@ export default {
     submit() {
       if (this.$refs.mail_form.validate()) {
         this.loading = true
+
         this.$emit('submit', this.input)
       }
     },

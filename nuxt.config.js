@@ -1,4 +1,4 @@
-const useE = true
+
 
 export default {
 
@@ -62,15 +62,15 @@ export default {
       appId: process.env.APPID,
     },
     onFirebaseHosting: true,
-    terminateDatabasesAfterGenerate: true,
+    // terminateDatabasesAfterGenerate: true,
     services: {
       auth: {
-        emulatorPort: process.env.NODE_ENV === 'development' && useE ? 9099 : undefined,
+        // emulatorPort: process.env.NODE_ENV === 'development' && useE ? 9099 : undefined,
         // onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
         // onAuthStateChangedAction: 'onAuthStateChangedAction',
       },
       firestore: {
-        enablePersistence: true,
+        //  enablePersistence: true,
         // emulatorPort: process.env.NODE_ENV === 'development' && useE ? 8080 : undefined,
         //  emulatorHost: "localhost"
       },
