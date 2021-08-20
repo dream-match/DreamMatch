@@ -2,13 +2,9 @@
   <section>
     <v-stepper v-model="step" max-width="960px" class="mx-auto fill-width">
       <v-stepper-header>
-        <v-stepper-step :complete="step > 1" step="1"> 認証 </v-stepper-step>
+        <v-stepper-step :complete="step > 1" step="1"> Step 1 </v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="step > 2" step="2">
-          プロフィール入力
-        </v-stepper-step>
-        <v-divider />
-        <v-stepper-step :complete="step > 3" step="3"> 確認 </v-stepper-step>
+        <v-stepper-step :complete="step > 2" step="2"> Step 2 </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
@@ -51,10 +47,32 @@
                   placeholder="ギターを練習しています"
                   hint="自分について短くまとめましょう"
                 />
+                <v-combobox
+                  v-model="input.skill"
+                  :items="items"
+                  chips
+                  clearable
+                  label="スキル"
+                  multiple
+                  hint="あなたの得意なことを書こう"
+                  prepend-icon="mdi-hammer-wrench"
+                >
+                  <template #selection="{ attrs, item, select, selected }">
+                    <v-chip
+                      v-bind="attrs"
+                      :input-value="selected"
+                      close
+                      @click="select"
+                      @click:close="remove(item)"
+                    >
+                      <strong>{{ item }}</strong>
+                    </v-chip>
+                  </template>
+                </v-combobox>
               </v-form>
             </v-card-text>
             <v-card-actions>
-              <v-btn color="primary" @click="step = 3">続行 </v-btn>
+              <v-btn color="primary" @click="step = 3"> 続行</v-btn>
 
               <v-btn text to="/"> Cancel </v-btn>
             </v-card-actions>
@@ -67,7 +85,7 @@
             </v-card-title>
             <v-divider />
             <v-card-actions>
-              <v-btn color="primary" @click="step = 3">登録</v-btn>
+              <v-btn color="primary">登録</v-btn>
               <v-btn text @click="step = 2"> 戻る </v-btn>
             </v-card-actions></v-card
           >
