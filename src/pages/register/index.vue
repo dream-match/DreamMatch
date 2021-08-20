@@ -34,7 +34,7 @@
             <v-divider />
             <v-card-text>
               <v-avatar size="72" color="primary">
-                <img v-if="input.image" :src="input.image" />
+                <v-img v-if="input.image" :src="input.image" />
               </v-avatar>
               <v-form>
                 <v-file-input

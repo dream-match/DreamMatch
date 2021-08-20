@@ -24,6 +24,7 @@ export default {
 
 
   plugins: [
+    "~/plugins/init"
   ],
 
   components: true,

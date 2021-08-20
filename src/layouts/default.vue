@@ -1,6 +1,10 @@
 <template>
   <v-app>
+    <AppDesktopMenu />
+    <AppMobileMenu />
+    <AppBar />
     <v-main>
+      <v-divider />
       <v-container>
         <Nuxt />
       </v-container>
