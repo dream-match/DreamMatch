@@ -18,7 +18,7 @@ service cloud.firestore {
         allow create: if isAuthenticated()
         && isValidUser(request.resource.data)
         && isUserAuthenticated(userId);
-        allow read: if isAuthenticated()
+        allow read: if true;
     }
   }
 }

@@ -9,7 +9,7 @@ service firebase.storage {
     }
     match /imgaes/profile/${userId} {
       allow read, write: if isUserAuthenticated(userId);
-      allow read:if isAuthenticated();
+      allow read:if true;
     }
   }
 }

@@ -16,10 +16,14 @@
           <AuthForm
             title="登録"
             btn-text="登録"
+            flat
             @submit="registerByMail"
             @loginGoogle="registerByGoogle"
           />
-          <div class="ma-2">既にアカウントがありますか? こちらでログイン</div>
+          <div class="ma-2">
+            既にアカウントがありますか? こちらで
+            <nuxt-link to="/login">ログイン</nuxt-link>
+          </div>
         </v-stepper-content>
 
         <v-stepper-content step="2">
@@ -103,6 +107,7 @@
 import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
+  layout: 'auth',
   data: () => ({
     input: {
       skill: [],

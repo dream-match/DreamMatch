@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-0" flat>
+  <v-card class="ma-0" :flat="flat">
     <v-card-title class="text-sm-h5 text-lg-h4 font-weight-bold">
       {{ title }}
     </v-card-title>
@@ -61,6 +61,7 @@
         Googleで{{ btnText }}
       </v-btn>
     </v-card-actions>
+    <slot />
   </v-card>
 </template>
 <script>
@@ -69,6 +70,7 @@ export default {
   props: {
     title: { type: String, default: '何かしらのフォーム' },
     btnText: { type: String, default: '続行しちゃう' },
+    flat: { type: Boolean, default: false },
   },
   data: () => ({
     showPassword: false,

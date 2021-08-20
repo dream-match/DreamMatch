@@ -4,9 +4,7 @@
       <v-container
         :class="{ 'pa-0': $vuetify.breakpoint.sm || $vuetify.breakpoint.xs }"
       >
-        <v-row justify="center" align-content="center">
-          <v-col> <nuxt /></v-col>
-        </v-row>
+        <nuxt />
       </v-container>
     </v-main>
     <footer style="background: #f5f5f5">
@@ -19,3 +17,21 @@
     </footer>
   </v-app>
 </template>
+<script>
+export default {
+  middleware({ redirect, $fire }) {
+    $fire.auth.onAuthStateChanged((user) => {
+      if (user) {
+        return redirect('/')
+      }
+    })
+  },
+  mounted() {
+    this.$fire.auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.$router.push('/')
+      }
+    })
+  },
+}
+</script>

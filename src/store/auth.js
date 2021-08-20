@@ -19,12 +19,14 @@ export const mutations = {
     setErrorCode(state, code) {
         state.errorCode = code
     },
-    setProf(state, prof) { state.userProf = prof }
+    setProf(state, prof) { state.userProf = prof },
+    ON_AUTH_STATE_CHANGED_MUTATION(state, { authUser, claims }) { console.log(authUser) }
 }
 
 export const actions = {
     async registerByMail({ commit }, { mail, pass }) {
         try {
+            commit("setRegisterStep", 1)
             const userCredential = await this.$fire.auth.createUserWithEmailAndPassword(mail, pass)
             const { uid, photoURL, email, displayName } = userCredential.user
             commit("setUser", { uid, photoURL, email, name: displayName })
@@ -37,6 +39,7 @@ export const actions = {
     },
     async registerByGoogle({ commit }) {
         try {
+            commit("setRegisterStep", 1)
             const provider = new this.$fireModule.auth.GoogleAuthProvider();
             const userCredential = await this.$fire.auth.signInWithPopup(provider);
             const { uid, photoURL, email, displayName } = userCredential.user
@@ -49,6 +52,7 @@ export const actions = {
     },
     async registerProf({ commit }, input) {
         try {
+            commit("setRegisterStep", 1)
             const user = this.$fire.auth.currentUser;
             let uploadedImgUrl = ""
             if (input.imageFile) {
@@ -73,8 +77,31 @@ export const actions = {
             console.error(e)
             this.$router.push('/')
         }
-    }
+    },
+    async loginByMail({ commit }, { mail, pass }) {
+        try {
+
+            const userCredential = await this.$fire.auth.signInWithEmailAndPassword(mail, pass)
+            const { uid, photoURL, email, displayName } = userCredential.user
+            commit("setUser", { uid, photoURL, email, name: displayName })
+            this.$router.push('/')
+        }
+        catch (e) {
+            commit("setErrorCode", e.code)
+        }
+    },
+    async loginByGoogle({ commit }) {
+        try {
+
+            const provider = new this.$fireModule.auth.GoogleAuthProvider();
+            const userCredential = await this.$fire.auth.signInWithPopup(provider);
+            const { uid, photoURL, email, displayName } = userCredential.user
+            commit("setUser", { uid, photoURL, email, name: displayName })
+            this.$router.push('/')
+        }
+        catch (e) {
+            commit("setErrorCode", e.code)
+        }
+    },
 }
-
-
 
