@@ -1,9 +1,9 @@
 export const state = () => ({
-    userData: { uid: "", photoURL: "", email: "" },
+    userData: { uid: "", photoURL: "", email: "", name: "" },
+    userProf: null,
     logined: false,
     registerStep: 1,
     errorCode: ""
-
 })
 
 export const mutations = {
@@ -18,7 +18,8 @@ export const mutations = {
     },
     setErrorCode(state, code) {
         state.errorCode = code
-    }
+    },
+    setSetProf(state, prof) { state.userProf = prof }
 }
 
 export const actions = {
@@ -26,7 +27,7 @@ export const actions = {
         try {
             const userCredential = await this.$fire.auth.createUserWithEmailAndPassword(mail, pass)
             const { uid, photoURL, email, displayName } = userCredential.user
-            commit("setUser", { uid, photoURL, email, displayName })
+            commit("setUser", { uid, photoURL, email, name: displayName })
             commit("addRegisterStep")
         }
         catch (e) {
@@ -34,16 +35,14 @@ export const actions = {
         }
     },
     async registerByGoogle({ commit }) {
-        console.log("do login with google")
         try {
             const provider = new this.$fireModule.auth.GoogleAuthProvider();
             const userCredential = await this.$fire.auth.signInWithPopup(provider);
-            const { uid, photoURL, email, displayName } = userCredential
-            commit("setUser", { uid, photoURL, email, displayName })
+            const { uid, photoURL, email, displayName } = userCredential.user
+            commit("setUser", { uid, photoURL, email, name: displayName })
             commit("addRegisterStep")
         }
         catch (e) {
-            console.error(e)
             commit("setErrorCode", e.code)
         }
     }

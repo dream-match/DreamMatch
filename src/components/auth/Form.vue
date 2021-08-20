@@ -8,7 +8,7 @@
       <v-alert v-if="errorMsg" dense outlined type="error"
         >{{ errorMsg }}
       </v-alert>
-      <v-form v-model="isValid">
+      <v-form ref="mail_form">
         <v-text-field
           v-model="input.mail"
           type="email"
@@ -72,7 +72,7 @@ export default {
   },
   data: () => ({
     showPassword: false,
-    isValid: false,
+
     passRules: [
       (v) => !!v || '',
       (v) => /^[\w-]{6,72}$/.test(v) || '6文字以上にしてください',
@@ -83,6 +83,7 @@ export default {
     loading: false,
     loadingGoogle: false,
     errorMsg: '',
+    suc: false,
   }),
   computed: {
     ...mapState('auth', ['errorCode']),
@@ -97,7 +98,7 @@ export default {
   },
   methods: {
     submit() {
-      if (this.isValid) {
+      if (this.$refs.mail_form.validate()) {
         this.loading = true
         this.$emit('submit', this.input)
       }
