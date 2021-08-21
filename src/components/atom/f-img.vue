@@ -20,8 +20,14 @@ export default {
           /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-/]))?/
 
         if (!isURL.test(v)) {
-          await this.getResizedUrl(v)
-
+          const imageUrlCache = localStorage.getItem(v)
+          if (imageUrlCache) {
+            const { src, lazySrc } = JSON.parse(imageUrlCache)
+            this.src = src
+            this.lazySrc = lazySrc
+          } else {
+            await this.getResizedUrl(v)
+          }
           !this.src && (await this.getSrcUrl())
         } else {
           this.src = v
@@ -52,6 +58,8 @@ export default {
       }
 
       await Promise.all([getSrc(), getLazySrc()])
+      const imageUrl = { src: this.src, lazySrc: this.lazySrc }
+      localStorage.setItem(v, JSON.stringify(imageUrl))
     },
     async getSrcUrl() {
       const ref = this.$fire.storage.ref(this.path)

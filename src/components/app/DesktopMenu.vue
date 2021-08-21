@@ -37,19 +37,10 @@
   </v-navigation-drawer>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   computed: {
-    drawer: {
-      get() {
-        return this.openMainMenu
-      },
-      set(v) {
-        return this.setMainMenu(v)
-      },
-    },
-    ...mapState(['userData', 'openMainMenu']),
+    ...mapState(['userData']),
   },
-  methods: { ...mapMutations(['setMainMenu']) },
 }
 </script>
