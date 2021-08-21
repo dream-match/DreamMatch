@@ -11,19 +11,22 @@ export default {
     },
   },
   watch: {
-    async path(v) {
-      if (!v) return
+    path: {
+      immediate: true,
+      async handler(v) {
+        if (!v) return
 
-      const isURL =
-        /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-/]))?/
+        const isURL =
+          /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-/]))?/
 
-      if (!isURL.test(v)) {
-        await this.getResizedUrl(v)
+        if (!isURL.test(v)) {
+          await this.getResizedUrl(v)
 
-        !this.src && (await this.getSrcUrl())
-      } else {
-        this.src = v
-      }
+          !this.src && (await this.getSrcUrl())
+        } else {
+          this.src = v
+        }
+      },
     },
   },
 
