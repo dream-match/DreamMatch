@@ -74,8 +74,8 @@ export default {
       auth: {
         // emulatorPort: process.env.NODE_ENV === 'development' && useE ? 9099 : undefined,
 
-        onAuthStateChangedMutation: 'auth/ON_AUTH_STATE_CHANGED_MUTATION',
-        // onAuthStateChangedAction: 'onAuthStateChangedAction',
+        // onAuthStateChangedMutation: 'auth/ON_AUTH_STATE_CHANGED_MUTATION',
+        onAuthStateChangedAction: 'getUserData',
       },
       firestore: {
         //  enablePersistence: true,
