@@ -1,10 +1,13 @@
-<template><div id="editorjs" /></template>
+<template>
+  <div id="editorjs"></div>
+</template>
 
 <script>
 export default {
   data: () => ({ editor: null }),
-  mounted() {
-    this.editor = new this.$editor('editorjs')
+  async mounted() {
+    const _editor = await this.$editor('editorjs')
+    await console.log(_editor)
   },
 }
 </script>
