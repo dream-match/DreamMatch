@@ -138,6 +138,9 @@ export default {
         this.input.image = v.photoURL
       },
     },
+    step(v) {
+      v === 3 && this.getUserData()
+    },
   },
   methods: {
     submit() {
@@ -160,6 +163,7 @@ export default {
       'registerByGoogle',
       'registerProf',
     ]),
+    ...mapActions(['getUserData']),
   },
 }
 </script>
