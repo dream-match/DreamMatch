@@ -11,5 +11,9 @@ service firebase.storage {
       allow read, write: if isUserAuthenticated(userId);
       allow read:if true;
     }
+     match /images/posts/{userId}/{imageId} {
+      allow  write: if isUserAuthenticated(userId);
+      allow read:if true;
+    }
   }
 }

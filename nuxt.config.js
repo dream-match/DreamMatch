@@ -25,6 +25,7 @@ export default {
 
   plugins: [
     "~/plugins/init"
+    , { src: "~/plugins/editor", mode: "client" }
   ],
 
   components:
