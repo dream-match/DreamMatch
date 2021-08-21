@@ -5,11 +5,9 @@
       color="blue-grey lighten-3"
       size="48"
       class="mr-6"
+      @click="drawer = !drawer"
     >
-      <f-img
-        :path="userData.uploadedPhotoPath || userData.photoURL"
-        @click="drawer = !drawer"
-      />
+      <f-img :path="userData.uploadedPhotoPath || userData.photoURL" />
     </v-avatar>
     <v-toolbar-title class="font-weight-black">{{ title }}</v-toolbar-title>
   </v-app-bar>
