@@ -27,7 +27,14 @@ export default {
     "~/plugins/init"
   ],
 
-  components: true,
+  components:
+    [{
+      path: '@/components',
+      pathPrefix: true
+    }, {
+      path: '@/components/atom',
+      pathPrefix: false
+    }],
 
   buildModules: [
 

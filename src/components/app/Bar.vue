@@ -6,7 +6,10 @@
       size="48"
       class="mr-6"
     >
-      <v-img :src="userData.photoURL" @click="drawer = !drawer" />
+      <f-img
+        :path="userData.uploadedPhotoPath || userData.photoURL"
+        @click="drawer = !drawer"
+      />
     </v-avatar>
     <v-toolbar-title class="font-weight-black">{{ title }}</v-toolbar-title>
   </v-app-bar>

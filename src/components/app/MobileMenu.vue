@@ -18,8 +18,11 @@
 
       <v-list dense>
         <v-list-item link>
-          <v-list-item-avatar>
-            <v-img :src="userData.photoURL"></v-img>
+          <v-list-item-avatar color="blue-grey lighten-3">
+            <f-img
+              :path="userData.uploadedPhotoPath || userData.photoURL"
+              @click="drawer = !drawer"
+            />
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title class="text-subtitle-1 font-weight-black">

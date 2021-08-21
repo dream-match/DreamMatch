@@ -48,23 +48,23 @@ export const actions = {
             commit("setErrorCode", e.code)
         }
     },
-    async registerProf({ commit }, input) {
+    async registerProf({ commit, state }, input) {
         try {
             const user = this.$fire.auth.currentUser;
-            let uploadedImgUrl = ""
+            let uploadedPath = ""
             if (input.imageFile) {
-                const snapshot = await this.$fire.storage.ref().child(`/images/profile/${user.uid}`).put(input.imageFile)
-                uploadedImgUrl = await snapshot.ref.getDownloadURL();
+                uploadedPath = `/images/profile/${user.uid}`
+                await this.$fire.storage.ref().child(uploadedPath).put(input.imageFile)
             }
             await user.updateProfile({
                 displayName: input.name,
-                photoURL: uploadedImgUrl || input.image
             })
             const { uid, photoURL, email, displayName } = user
             await this.$fire.firestore.collection('users').doc(user.uid).set({
                 prof: input.prof,
                 skills: input.skill, uid,
-                photoURL, email, name: displayName, createdAt: this.$fireModule.firestore.Timestamp.fromDate(new Date()),
+                photoURL, email, name: displayName, uploadedPhotoPath: uploadedPath,
+                createdAt: this.$fireModule.firestore.Timestamp.fromDate(new Date()),
             }, { merge: true });
 
 

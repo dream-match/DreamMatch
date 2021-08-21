@@ -8,8 +8,11 @@
     mini-variant-width="56"
   >
     <v-list-item class="px-2" :to="`/users/${userData.uid}`">
-      <v-avatar size="40">
-        <v-img :src="userData.photoURL"></v-img>
+      <v-avatar size="40" color="blue-grey lighten-3">
+        <f-img
+          :path="userData.uploadedPhotoPath || userData.photoURL"
+          @click="drawer = !drawer"
+        />
       </v-avatar>
     </v-list-item>
     <v-divider></v-divider>
