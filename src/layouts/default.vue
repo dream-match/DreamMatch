@@ -9,6 +9,7 @@
         <Nuxt />
       </v-container>
     </v-main>
+    <AppBottomNav />
   </v-app>
 </template>
 

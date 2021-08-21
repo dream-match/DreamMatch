@@ -8,7 +8,7 @@
     >
       <v-img :src="userData.photoURL" @click="drawer = !drawer" />
     </v-avatar>
-    <v-app-bar-title class="font-weight-black">{{ title }}</v-app-bar-title>
+    <v-toolbar-title class="font-weight-black">{{ title }}</v-toolbar-title>
   </v-app-bar>
 </template>
 <script>
@@ -19,8 +19,8 @@ export default {
       switch (this.$route.path) {
         case '/':
           return 'Home'
-        case '/bookmark':
-          return 'Bookmark'
+        case '/post':
+          return 'Posts'
         default:
           return '不明'
       }

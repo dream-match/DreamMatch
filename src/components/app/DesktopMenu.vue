@@ -17,6 +17,19 @@
       <v-list-item nuxt to="/">
         <v-icon>mdi-home</v-icon>
       </v-list-item>
+      <v-list-item
+        v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.sm"
+        nuxt
+        to="/search"
+      >
+        <v-icon>mdi-magnify</v-icon>
+      </v-list-item>
+      <v-list-item nuxt to="/post">
+        <v-icon>mdi-fountain-pen-tip</v-icon>
+      </v-list-item>
+      <v-list-item nuxt to="/setting">
+        <v-icon>mdi-cog</v-icon>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
