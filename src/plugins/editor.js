@@ -20,6 +20,9 @@ export default ({ $fire, store }, inject) => {
                                 class: require("@editorjs/list"),
                                 inlineToolbar: true,
                             },
+                            delimiter: require("@editorjs/delimiter"),
+                            quote: require('@editorjs/quote'),
+                            code: require("@editorjs/code"),
                             image: {
                                 class: require("@editorjs/image"),
                                 config: {
