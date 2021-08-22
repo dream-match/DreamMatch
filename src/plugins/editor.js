@@ -1,11 +1,12 @@
 /* eslint new-cap:0 */
 export default ({ $fire, store }, inject) => {
     const Editor = async (id, data) => {
-        const [EditorJS, Header, Embed, List, Delimiter, Quote, Code, Image] =
-            (await import("~/plugins/_editor")).default
+        const EditorJS = await import("@editorjs/editorjs")
+        const [Header, Embed, List, Delimiter, Quote, Code, Image] =
+            (await import("~/plugins/editor-plugins")).default
 
 
-        const editor = new EditorJS({
+        const editor = new EditorJS.default({
             holder: id,
             data,
             tools: {
