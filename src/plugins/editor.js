@@ -2,7 +2,7 @@
 export default ({ $fire, store }, inject) => {
     const Editor = async (id, data) => {
         const EditorJS = await import("@editorjs/editorjs")
-        const [Header, Embed, List, Delimiter, Quote, Code, Image] =
+        const [Header, Embed, List, Delimiter, Quote, Code, Image, Marker, InlineCode, LinkTool] =
             (await import("~/plugins/editor-plugins")).default
 
 
@@ -18,13 +18,16 @@ export default ({ $fire, store }, inject) => {
                     class: Embed,
                     inlineToolbar: true
                 },
-                link: {
+                list: {
                     class: List,
                     inlineToolbar: true,
                 },
                 delimiter: Delimiter,
                 quote: Quote,
                 code: Code,
+                Marker: { class: Marker },
+                InlineCode: { class: InlineCode, shortcut: 'CMD+SHIFT+M', },
+                linkTool: { class: LinkTool, config: { endpoint: "https://asia-northeast1-snstest-9f2b5.cloudfunctions.net/getOgp" } },
                 image: {
                     class: Image,
                     config: {

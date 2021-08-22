@@ -43,7 +43,10 @@
           </template>
         </v-combobox>
         <v-card outlined max-width="700" class="mx-auto">
-          <v-card-text class="px-8">
+          <v-card-text class="text-h6 font-weight-black black--text"
+            >本文
+          </v-card-text>
+          <v-card-text class="px-8 black--text">
             <Editor />
           </v-card-text>
         </v-card>

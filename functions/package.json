@@ -14,12 +14,12 @@
   },
   "main": "index.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "firebase-admin": "^9.8.0",
-    "firebase-functions": "^3.14.1"
+    "firebase-functions": "^3.14.1",
+    "ogp-parser": "^0.5.6"
   },
   "devDependencies": {
-    "eslint": "^7.6.0",
-    "eslint-config-google": "^0.14.0",
     "firebase-functions-test": "^0.2.0"
   },
   "private": true
