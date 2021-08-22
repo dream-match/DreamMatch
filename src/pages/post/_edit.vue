@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card>
+    <v-card :tile="isSmallWin" :flat="isSmallWin">
       <v-card-text>
         <v-text-field
           label="Title"
@@ -10,9 +10,11 @@
         <v-combobox
           v-model="tags"
           :items="list"
+          :hide-no-data="!search"
+          :search-input.sync="search"
           chips
           clearable
-          label="スキル"
+          label="タグ"
           multiple
           hint="あなたの得意なことを書こう"
           prepend-icon="mdi-hammer-wrench"
@@ -40,14 +42,35 @@
             </v-chip>
           </template>
         </v-combobox>
-        <Editor
-      /></v-card-text>
+        <v-card outlined max-width="700" class="mx-auto">
+          <v-card-text class="px-8">
+            <Editor />
+          </v-card-text>
+        </v-card>
+      </v-card-text>
     </v-card>
   </div>
 </template>
 <script>
 export default {
-  data: () => ({ tags: [], list: ['歌ってみた', 'Webサイト', 'ボカロ'] }),
+  data: () => ({
+    tags: [],
+    list: [
+      '歌ってみた',
+      'Webサイト',
+      'ボカロ',
+      '動画',
+      'プログラミング',
+      'ゲーム',
+      '記事',
+    ],
+    search: '',
+  }),
+  computed: {
+    isSmallWin() {
+      return this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.xs
+    },
+  },
   methods: {
     removeTag(name) {
       this.tags.splice(this.tags.indexOf(name), 1)
