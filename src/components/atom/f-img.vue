@@ -15,6 +15,7 @@ export default {
       immediate: true,
       async handler(v) {
         if (!v) return
+        console.log(v)
 
         const isURL =
           /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-/]))?/
@@ -26,9 +27,12 @@ export default {
             this.src = src
             this.lazySrc = lazySrc
           } else {
-            await this.getResizedUrl(v)
+            try {
+              await this.getResizedUrl(v)
+            } catch (e) {
+              await this.getSrcUrl()
+            }
           }
-          !this.src && (await this.getSrcUrl())
         } else {
           this.src = v
         }

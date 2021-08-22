@@ -6,18 +6,21 @@
           label="Title"
           placeholder="歌ってみた"
           outlined
-        ></v-text-field>
+          prepend-icon="mdi-subtitles"
+        />
+        <v-file-input outlined accept="image/*" label="タイトル画像" />
         <v-combobox
           v-model="tags"
           :items="list"
           :hide-no-data="!search"
           :search-input.sync="search"
           chips
+          outlined
           clearable
           label="タグ"
           multiple
           hint="あなたの得意なことを書こう"
-          prepend-icon="mdi-hammer-wrench"
+          prepend-icon="mdi-tag"
         >
           <template #no-data>
             <v-list-item>
@@ -42,12 +45,27 @@
             </v-chip>
           </template>
         </v-combobox>
-        <v-card outlined max-width="700" class="mx-auto">
-          <v-card-text class="text-h6 font-weight-black black--text"
-            >本文
-          </v-card-text>
-          <v-card-text class="px-8 black--text">
-            <Editor />
+        <v-textarea
+          outlined
+          name="input-7-4"
+          label="概要"
+          placeholder="Georgeの冒険を歌ってみた"
+          prepend-icon="mdi-image-text"
+        />
+        <v-card outlined>
+          <v-tabs v-model="tab">
+            <v-tab>Write</v-tab>
+            <v-tab>Preview</v-tab>
+          </v-tabs>
+          <v-card-text class="black--text">
+            <v-tabs-items v-model="tab">
+              <v-tab-item>
+                <Editor @saved="setSavedata" />
+              </v-tab-item>
+              <v-tab-item>
+                <Content :doc="save" />
+              </v-tab-item>
+            </v-tabs-items>
           </v-card-text>
         </v-card>
       </v-card-text>
@@ -67,7 +85,9 @@ export default {
       'ゲーム',
       '記事',
     ],
+    save: {},
     search: '',
+    tab: '',
   }),
   computed: {
     isSmallWin() {
@@ -78,6 +98,9 @@ export default {
     removeTag(name) {
       this.tags.splice(this.tags.indexOf(name), 1)
       this.tags = [...this.tsgs]
+    },
+    setSavedata(v) {
+      this.save = v
     },
   },
 }

@@ -40,7 +40,7 @@ export default ({ $fire, store }, inject) => {
                                     return {
                                         success: 1, file: {
                                             url,
-                                            resized_path: `images/posts/${store.state.userData.uid}/${file.name.replace(".", "_1280x720.")}`
+                                            resized_path: `images/posts/${store.state.userData.uid}/${file.name}`
                                         }
                                     }
                                 } catch (e) {

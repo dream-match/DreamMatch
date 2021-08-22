@@ -28,6 +28,7 @@
     "@nuxtjs/firebase": "^7.6.1",
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.15.1",
+    "editorjs-html": "^3.4.0",
     "firebase": "^8.10.0",
     "nuxt": "^2.15.7",
     "vuetify": "^2.5.5"
