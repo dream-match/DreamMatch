@@ -18,6 +18,13 @@ export default {
   > * {
     margin: 1rem;
   }
+
+  h2 {
+    border-bottom: 6px double #000;
+  }
+  h3 {
+    border-bottom: 3px dashed #000;
+  }
   pre {
     border-radius: 5px;
     padding: 3px;
