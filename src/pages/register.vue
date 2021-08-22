@@ -58,6 +58,17 @@
                   hint="あなたの得意なことを書こう"
                   prepend-icon="mdi-hammer-wrench"
                 >
+                  <template #no-data>
+                    <v-list-item>
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          リストにSkill:"<strong>{{ search }}</strong
+                          >"が見つかりませんでした
+                          <kbd>enter</kbd> を押すと新たに追加できます。
+                        </v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </template>
                   <template #selection="{ attrs, item, select, selected }">
                     <v-chip
                       v-bind="attrs"
@@ -148,8 +159,8 @@ export default {
       this.loading = true
     },
     remove(item) {
-      this.chips.splice(this.input.skill.indexOf(item), 1)
-      this.chips = [...this.input.skill]
+      this.input.skill.splice(this.input.skill.indexOf(item), 1)
+      this.input.skill = [...this.input.skill]
     },
     setUserImage(img) {
       if (img) {
