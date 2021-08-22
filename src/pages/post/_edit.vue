@@ -1,1 +1,3 @@
-<template><Editor /></template>
+<template>
+  <div><Editor /></div>
+</template>

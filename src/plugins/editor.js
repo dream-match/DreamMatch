@@ -1,28 +1,31 @@
 /* eslint new-cap:0 */
 export default ({ $fire, store }, inject) => {
     const Editor = async (id, data) => {
-        const EditorJS = await import("@editorjs/editorjs")
-        const editor = new EditorJS.default({
+        const [EditorJS, Header, Embed, List, Delimiter, Quote, Code, Image] =
+            (await import("~/plugins/_editor")).default
+
+
+        const editor = new EditorJS({
             holder: id,
             data,
             tools: {
                 header: {
-                    class: require('@editorjs/header'),
+                    class: Header,
                     shortcut: 'CMD+SHIFT+H',
                 },
                 embed: {
-                    class: require("@editorjs/embed"),
+                    class: Embed,
                     inlineToolbar: true
                 },
                 link: {
-                    class: require("@editorjs/list"),
+                    class: List,
                     inlineToolbar: true,
                 },
-                delimiter: require("@editorjs/delimiter"),
-                quote: require('@editorjs/quote'),
-                code: require("@editorjs/code"),
+                delimiter: Delimiter,
+                quote: Quote,
+                code: Code,
                 image: {
-                    class: require("@editorjs/image"),
+                    class: Image,
                     config: {
                         uploader: {
                             async uploadByFile(file) {
@@ -30,7 +33,12 @@ export default ({ $fire, store }, inject) => {
                                     const storageRef = $fire.storage.ref(`images/posts/${store.state.userData.uid}`)
                                     const snapshot = await storageRef.child(file.name).put(file)
                                     const url = await snapshot.ref.getDownloadURL()
-                                    return { success: 1, file: { url } }
+                                    return {
+                                        success: 1, file: {
+                                            url,
+                                            resized_path: `images/posts/${store.state.userData.uid}/${file.name.replace(".", "_1280x720.")}`
+                                        }
+                                    }
                                 } catch (e) {
                                     return { success: false, file: { url: false } }
                                 }
