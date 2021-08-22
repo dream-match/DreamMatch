@@ -9,6 +9,7 @@ export default {
     loadData: { type: Object, default: null },
   },
   data: () => ({ editor: null, timer: 0 }),
+
   watch: {
     async timer(v) {
       if (v === 1000) {
