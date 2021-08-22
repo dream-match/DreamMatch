@@ -6,7 +6,7 @@ export default {
   render(h) {
     const parsed = new Parser(this.doc).get()
     return h(
-      'div',
+      'article',
       { class: 'content-root' },
       parsed.map((i) => h(i.tag, i.p, i.v))
     )
@@ -18,12 +18,22 @@ export default {
   > * {
     margin: 1rem;
   }
-
-  h2 {
+  h1 {
+    font-size: 3.5rem;
     border-bottom: 6px double #000;
   }
+  h2 {
+    font-size: 3rem;
+    border-bottom: 3px solid #000;
+  }
   h3 {
-    border-bottom: 3px dashed #000;
+    font-size: 2.125rem;
+    border-bottom: 3px dotted #000;
+  }
+  h4,
+  h5,
+  h6 {
+    border-bottom: 1px solid #222;
   }
   pre {
     border-radius: 5px;
