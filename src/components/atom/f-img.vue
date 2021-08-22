@@ -15,7 +15,6 @@ export default {
       immediate: true,
       async handler(v) {
         if (!v) return
-        console.log(v)
 
         const isURL =
           /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-/]))?/
