@@ -2,9 +2,8 @@
   <div>
     <v-card :tile="isSmallWin" :flat="isSmallWin">
       <v-card-actions>
-        <v-spacer /><v-btn large color="primary" class="font-weight-black"
-          >投稿</v-btn
-        >
+        <v-spacer />
+        <v-btn large color="primary" class="font-weight-black"> 投稿</v-btn>
       </v-card-actions>
       <v-card-text>
         <v-text-field
@@ -76,7 +75,7 @@
                 <Editor @saved="setSavedata" />
               </v-tab-item>
               <v-tab-item>
-                <Content :doc="save" />
+                <Content :doc="input.save" />
               </v-tab-item>
             </v-tabs-items>
           </v-card-text>
