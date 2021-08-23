@@ -102,11 +102,13 @@ export default {
     isUploading: false,
     tab: null,
   }),
+
   computed: {
     isSmallWin() {
       return this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.xs
     },
   },
+  async mounted() {},
   methods: {
     removeTag(name) {
       this.input.tags.splice(this.input.tags.indexOf(name), 1)
