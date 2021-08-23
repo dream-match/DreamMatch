@@ -1,16 +1,27 @@
 <template>
   <div>
     <v-card :tile="isSmallWin" :flat="isSmallWin">
+      <v-card-actions>
+        <v-spacer /><v-btn large color="primary" class="font-weight-black"
+          >投稿</v-btn
+        >
+      </v-card-actions>
       <v-card-text>
         <v-text-field
+          v-model="input.title"
           label="Title"
           placeholder="歌ってみた"
           outlined
           prepend-icon="mdi-subtitles"
         />
-        <v-file-input outlined accept="image/*" label="タイトル画像" />
+        <v-file-input
+          outlined
+          accept="image/*"
+          label="タイトル画像"
+          @change="setFile"
+        />
         <v-combobox
-          v-model="tags"
+          v-model="input.tags"
           :items="list"
           :hide-no-data="!search"
           :search-input.sync="search"
@@ -26,8 +37,9 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>
-                  リストにTag:"<strong>{{ search }}</strong
-                  >"が見つかりませんでした
+                  リストにTag:"
+                  <strong>{{ search }}</strong>
+                  "が見つかりませんでした
                   <kbd>enter</kbd> を押すと新たに追加できます。
                 </v-list-item-title>
               </v-list-item-content>
@@ -46,6 +58,7 @@
           </template>
         </v-combobox>
         <v-textarea
+          v-model="input.description"
           outlined
           name="input-7-4"
           label="概要"
@@ -75,7 +88,7 @@
 <script>
 export default {
   data: () => ({
-    tags: [],
+    input: { title: '', file: null, tags: [], description: '', save: {} },
     list: [
       '歌ってみた',
       'Webサイト',
@@ -85,9 +98,10 @@ export default {
       'ゲーム',
       '記事',
     ],
-    save: {},
     search: '',
-    tab: '',
+    isSaving: false,
+    isUploading: false,
+    tab: null,
   }),
   computed: {
     isSmallWin() {
@@ -96,11 +110,23 @@ export default {
   },
   methods: {
     removeTag(name) {
-      this.tags.splice(this.tags.indexOf(name), 1)
-      this.tags = [...this.tsgs]
+      this.input.tags.splice(this.input.tags.indexOf(name), 1)
+      this.input.tags = [...this.input.tsgs]
     },
     setSavedata(v) {
-      this.save = v
+      this.isSaving = true
+      this.input.save = v
+      this.isupported = false
+    },
+    setFile(f) {
+      this.input.file = f
+    },
+    save() {
+      this.isUploading = true
+      this.isSaving = true
+    },
+    upload() {
+      this.isUploading = true
     },
   },
 }

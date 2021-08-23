@@ -33,6 +33,7 @@ export default {
   h4,
   h5,
   h6 {
+    font-size: 1.5rem;
     border-bottom: 1px solid #222;
   }
   pre {
