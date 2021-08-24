@@ -4,6 +4,7 @@ export default {
   props: { doc: { type: Object, required: true } },
 
   render(h) {
+    console.log(this.doc)
     const parsed = new Parser(this.doc).get()
     return h(
       'article',

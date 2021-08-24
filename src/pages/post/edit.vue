@@ -3,7 +3,15 @@
     <v-card :tile="isSmallWin" :flat="isSmallWin">
       <v-card-actions>
         <v-spacer />
-        <v-btn large color="primary" class="font-weight-black"> 投稿</v-btn>
+        <v-btn
+          large
+          color="primary"
+          class="font-weight-black"
+          :loading="isUploading"
+          @click="upload"
+        >
+          投稿</v-btn
+        >
       </v-card-actions>
       <v-card-text>
         <v-text-field
@@ -72,7 +80,11 @@
           <v-card-text class="black--text">
             <v-tabs-items v-model="tab">
               <v-tab-item>
-                <Editor @saved="setSavedata" />
+                <Editor
+                  :load-data="forLoad"
+                  @saved="setSavedata"
+                  @editor="setEditor"
+                />
               </v-tab-item>
               <v-tab-item>
                 <Content :doc="input.save" />
@@ -97,8 +109,9 @@ export default {
       'ゲーム',
       '記事',
     ],
+    forLoad: {},
     search: '',
-    isSaving: false,
+    editor: null,
     isUploading: false,
     tab: null,
   }),
@@ -108,26 +121,44 @@ export default {
       return this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.xs
     },
   },
-  async mounted() {},
+  async mounted() {
+    const { id } = this.$route.query
+    await this.$store.dispatch('edit/prepare', id)
+    const {
+      title = '',
+      tags = [],
+      description = '',
+      save = '{}',
+    } = this.$store.state.edit.saveData
+    this.forLoad = JSON.parse(save)
+    this.input = { ...this.input, title, tags, description }
+  },
   methods: {
     removeTag(name) {
       this.input.tags.splice(this.input.tags.indexOf(name), 1)
       this.input.tags = [...this.input.tsgs]
     },
     setSavedata(v) {
-      this.isSaving = true
       this.input.save = v
-      this.isupported = false
     },
     setFile(f) {
       this.input.file = f
     },
-    save() {
-      this.isUploading = true
-      this.isSaving = true
+    setEditor(e) {
+      this.editor = e
     },
-    upload() {
+    async upload() {
       this.isUploading = true
+      const { title, file, tags, description } = this.input
+      const save = await this.editor.save()
+      await this.$store.dispatch('edit/upload', {
+        title,
+        file,
+        tags,
+        description,
+        save: JSON.stringify(save),
+      })
+      this.isUploading = false
     },
   },
 }

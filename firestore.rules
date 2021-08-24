@@ -20,5 +20,11 @@ service cloud.firestore {
         && isUserAuthenticated(userId);
         allow read: if true;
     }
+    match /posts/{id}{
+      allow write: if isAuthenticated() 
+      && "uid" in request.resource.data
+      && request.resource.data.uid == request.auth.uid;
+      allow read: if true;
+    }
   }
 }

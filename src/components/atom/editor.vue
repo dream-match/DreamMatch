@@ -8,7 +8,7 @@ export default {
     isSave: { type: Boolean, default: false },
     loadData: { type: Object, default: null },
   },
-  data: () => ({ editor: null, timer: 0 }),
+  data: () => ({ editor: null, timer: 0, editorLoaded: false, forLoad: {} }),
 
   watch: {
     async timer(v) {
@@ -22,14 +22,33 @@ export default {
       }
     },
     loadData: {
-      immediate: true,
-      async handler(v) {
-        this.editor = await this.$editor('editorjs', this.loadData)
+      handler(v) {
+        if (!Object.keys(v).length) {
+          return
+        }
+        this.forLoad = v
+        if (this.editor && this.editor.blocks) {
+          for (const block of this.forLoad.blocks) {
+            const { type, data } = block
+            this.editor.blocks.insert(type, data)
+          }
+          this.forLoad = {}
+        }
       },
     },
   },
 
-  mounted() {
+  async mounted() {
+    this.editor = await this.$editor('editorjs')
+    await this.editor.isReady
+    if (Object.keys(this.forLoad).length) {
+      for (const block of this.forLoad.blocks) {
+        const { type, data } = block
+        this.editor.blocks.insert(type, data)
+      }
+      this.forLoad = {}
+    }
+    this.$emit('editor', this.editor)
     setInterval(() => {
       this.timer++
     }, 1)
