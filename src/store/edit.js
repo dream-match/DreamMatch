@@ -33,7 +33,13 @@ export const actions = {
             .doc(id)
             .get()
           const { title, tags, description, save } = res.data()
-          return { title, tags, description, save }
+          return {
+            title,
+            tags,
+            description,
+            save,
+            updateAt: this.$fireModule.firestore.FieldValue.serverTimestamp(),
+          }
         } else {
           return {
             createdAt: this.$fireModule.firestore.FieldValue.serverTimestamp(),

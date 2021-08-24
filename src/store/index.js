@@ -20,6 +20,12 @@ export const mutations = {
 
 export const actions = {
   getUserData({ commit, state }) {
+    if (process.client) {
+      commit('setUserData', {
+        ...state.userData,
+        uid: localStorage.getItem('uid') || '',
+      })
+    }
     this.$fire.auth.onAuthStateChanged((user) => {
       if (user) {
         const { uid, photoURL, email, displayName } = user
@@ -30,6 +36,7 @@ export const actions = {
           email,
           displayName,
         })
+        localStorage.setItem('uid', uid)
         this.$fire.firestore
           .collection('users')
           .doc(uid)
