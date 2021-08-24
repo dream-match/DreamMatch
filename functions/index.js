@@ -3,7 +3,6 @@ const cors = require('cors')({ origin: true })
 const ogp = require('ogp-parser')
 
 exports.getOgp = functions
-  .set('Cache-Control', 'public, max-age=864000s')
   .region('asia-northeast1')
   .https.onRequest((req, res) => {
     cors(req, res, async () => {
@@ -13,7 +12,7 @@ exports.getOgp = functions
           const title = result.title
           const description = result.ogp['og:description']
           const imageUrl = result.ogp['og:image']
-          res.json({
+          res.set('Cache-Control', 'public, max-age=864000s').json({
             success: 1,
             meta: {
               title,

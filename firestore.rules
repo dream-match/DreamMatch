@@ -24,6 +24,7 @@ service cloud.firestore {
       allow write: if isAuthenticated() 
       && "uid" in request.resource.data
       && request.resource.data.uid == request.auth.uid;
+      allow delete: if isAuthenticated() && get(/databases/$(database)/documents/posts/$(id)).data.uid==request.auth.uid;
       allow read: if true;
     }
   }

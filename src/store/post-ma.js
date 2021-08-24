@@ -13,30 +13,38 @@ export const mutations = {
 }
 
 export const actions = {
-  async getPosts({ commit, rootState }) {
+  getPosts({ commit, rootState }) {
     try {
-      const res = await this.$fire.firestore
+      this.$fire.firestore
         .collection('posts')
         .where('uid', '==', rootState.userData.uid)
         .orderBy('createdAt', 'desc')
         .limit(50)
-        .get()
-      if (res) {
-        const posts = res.docs.map((d) => {
-          const { id } = d
-          const { createdAt, description, title, titleImgPath } = d.data()
-          return {
-            id,
-            createdAt: createdAt
-              .toDate()
-              .toLocaleDateString('ja-JP', formatOptions),
-            description,
-            title,
-            titleImgPath,
+        .onSnapshot((res) => {
+          if (res) {
+            const posts = res.docs.map((d) => {
+              const { id } = d
+              const { createdAt, description, title, titleImgPath } = d.data()
+              return {
+                id,
+                createdAt: createdAt
+                  .toDate()
+                  .toLocaleDateString('ja-JP', formatOptions),
+                description,
+                title,
+                titleImgPath,
+              }
+            })
+            commit('setPosts', posts)
           }
         })
-        commit('setPosts', posts)
-      }
+    } catch (e) {
+      console.error(e)
+    }
+  },
+  async deletePost({ commit }, id) {
+    try {
+      await this.$fire.firestore.collection('posts').doc(id).delete()
     } catch (e) {
       console.error(e)
     }
