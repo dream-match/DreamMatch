@@ -21,7 +21,9 @@ export default {
         case '/':
           return 'Home'
         case '/post':
-          return 'Posts'
+          return '投稿一覧'
+        case '/post/edit':
+          return '投稿＆編集'
         default:
           return '不明'
       }
