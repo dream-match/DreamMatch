@@ -1,5 +1,8 @@
 <template>
   <v-app-bar app flat color="white">
+    <v-btn v-if="isUsers" fab text small to="/">
+      <v-icon>mdi-chevron-left</v-icon>
+    </v-btn>
     <v-avatar
       v-if="$vuetify.breakpoint.xs"
       color="blue-grey lighten-3"
@@ -19,14 +22,18 @@ export default {
     title() {
       switch (this.$route.path) {
         case '/':
+        case '/users':
           return 'Home'
         case '/post':
           return '投稿一覧'
         case '/post/edit':
           return '投稿＆編集'
         default:
-          return '不明'
+          return this.bar || 'Home'
       }
+    },
+    isUsers() {
+      return this.$route.path.includes('/users')
     },
     drawer: {
       get() {
@@ -36,7 +43,7 @@ export default {
         return this.setMainMenu(v)
       },
     },
-    ...mapState(['openMainMenu', 'userData']),
+    ...mapState(['openMainMenu', 'userData', 'bar']),
   },
   methods: { ...mapMutations(['setMainMenu']) },
 }

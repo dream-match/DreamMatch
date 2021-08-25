@@ -5,9 +5,8 @@
     <AppBar />
     <v-main>
       <v-divider />
-      <v-container>
-        <Nuxt />
-      </v-container>
+
+      <Nuxt />
     </v-main>
     <AppBottomNav />
   </v-app>

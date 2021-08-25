@@ -56,6 +56,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  middleware: 'login',
   data: () => ({ deleteId: '', deleting: '' }),
   computed: { ...mapState('post-ma', ['posts']) },
   async mounted() {

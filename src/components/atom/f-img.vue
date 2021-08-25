@@ -1,9 +1,12 @@
 <template>
-  <v-img :src="src" :lazy-src="lazySrc" color="gray" />
+  <v-img :src="src" :lazy-src="lazySrc" :height="height"><slot /></v-img>
 </template>
 <script>
 export default {
-  props: { path: { type: String, default: '' } },
+  props: {
+    path: { type: String, default: '' },
+    height: { type: String, default: null },
+  },
   data: () => ({ src: '', lazySrc: '' }),
   computed: {
     pathList() {

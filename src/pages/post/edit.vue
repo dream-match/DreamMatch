@@ -98,6 +98,7 @@
 </template>
 <script>
 export default {
+  middleware: 'login',
   data: () => ({
     input: { title: '', file: null, tags: [], description: '', save: {} },
     list: [

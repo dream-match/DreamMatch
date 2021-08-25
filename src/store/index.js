@@ -7,6 +7,7 @@ export const state = () => ({
     name: '',
     uploadedPhotoPath: '',
   },
+  bar: '',
 })
 
 export const mutations = {
@@ -15,6 +16,9 @@ export const mutations = {
   },
   setMainMenu(state, boolen) {
     state.openMainMenu = boolen
+  },
+  setBarText(state, text) {
+    state.bar = text
   },
 }
 

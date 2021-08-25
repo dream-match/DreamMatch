@@ -1,9 +1,5 @@
-
-
 export default {
-
   target: 'static',
-
 
   head: {
     titleTemplate: '%s - sns',
@@ -12,52 +8,42 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  css: [
-  ],
+  css: [],
 
+  plugins: ['~/plugins/init', { src: '~/plugins/editor', mode: 'client' }],
 
-  plugins: [
-    "~/plugins/init"
-    , { src: "~/plugins/editor", mode: "client" }
-  ],
-
-  components:
-    [{
+  components: [
+    {
       path: '@/components',
-      pathPrefix: true
-    }, {
+      pathPrefix: true,
+    },
+    {
       path: '@/components/atom',
-      pathPrefix: false
-    }],
+      pathPrefix: false,
+    },
+  ],
 
   buildModules: [
-
     '@nuxtjs/eslint-module',
 
     '@nuxtjs/stylelint-module',
 
     '@nuxtjs/vuetify',
+    '@nuxtjs/tailwindcss',
   ],
 
-  srcDir: "src",
-  modules: [
-
-    '@nuxtjs/pwa',
-    '@nuxtjs/firebase'
-  ],
-
+  srcDir: 'src',
+  modules: ['@nuxtjs/pwa', '@nuxtjs/firebase'],
 
   pwa: {
     manifest: {
-      lang: 'ja'
-    }
+      lang: 'ja',
+    },
   },
 
   firebase: {
@@ -79,17 +65,13 @@ export default {
         onAuthStateChangedAction: 'getUserData',
       },
       firestore: {
-        //  enablePersistence: true,
+        enablePersistence: true,
         // emulatorPort: process.env.NODE_ENV === 'development' && useE ? 8080 : undefined,
         //  emulatorHost: "localhost"
       },
-      storage: true
-    }
+      storage: true,
+    },
   },
 
-
-
-
-  build: {
-  }
+  build: {},
 }
