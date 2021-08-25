@@ -1,5 +1,7 @@
 <template>
-  <v-img :src="src" :lazy-src="lazySrc" :height="height"><slot /></v-img>
+  <client-only>
+    <v-img :src="src" :lazy-src="lazySrc" :height="height"><slot /></v-img
+  ></client-only>
 </template>
 <script>
 export default {

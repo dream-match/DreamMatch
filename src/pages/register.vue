@@ -129,6 +129,7 @@ export default {
     },
     loading: false,
     items: ['プログラミング', '執筆', '作曲', 'ギター'],
+    search: '',
   }),
   computed: {
     ...mapState('auth', ['registerStep', 'userData']),

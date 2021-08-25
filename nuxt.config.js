@@ -32,9 +32,8 @@ export default {
     '@nuxtjs/eslint-module',
 
     '@nuxtjs/stylelint-module',
-
-    '@nuxtjs/vuetify',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/vuetify',
   ],
 
   srcDir: 'src',

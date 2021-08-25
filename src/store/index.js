@@ -47,9 +47,13 @@ export const actions = {
           .get()
           .then((d) => {
             if (d.exists) {
-              const { uploadedPhotoPath } = d.data()
+              const { uploadedPhotoPath, skills } = d.data()
 
-              commit('setUserData', { ...state.userData, uploadedPhotoPath })
+              commit('setUserData', {
+                ...state.userData,
+                uploadedPhotoPath,
+                skills,
+              })
             }
           })
       }

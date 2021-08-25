@@ -19,6 +19,15 @@ service cloud.firestore {
         && isValidUser(request.resource.data)
         && isUserAuthenticated(userId);
         allow read: if true;
+
+        match /follower/{fuserId}{
+          allow write:if isUserAuthenticated(fuserId); 
+          allow read:if true;
+        }
+        match /following/{fuserId}{
+          allow write:if isUserAuthenticated(userId); 
+          allow read:if true;
+        }
     }
     match /posts/{id}{
       allow write: if isAuthenticated() 

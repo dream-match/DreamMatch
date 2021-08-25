@@ -6,20 +6,23 @@
         <div class="relative flex w-full">
           <div class="flex flex-1">
             <div style="margin-top: -6rem">
-              <div
-                style="height: 9rem; width: 9rem"
-                class="md rounded-full relative avatar"
-              >
+              <v-avatar size="140">
                 <f-img
                   class="md rounded-full relative border-2 border-white"
                   :path="userData.uploadedPhotoPath || userData.photoURL"
                 />
-              </div>
+              </v-avatar>
             </div>
           </div>
 
           <div class="flex flex-col text-right">
-            <div><v-btn outlined>Edit Profile</v-btn></div>
+            <div v-if="isMine">
+              <v-btn outlined >プロフィール編集</v-btn>
+            </div>
+            <div v-else>
+              <v-btn v-if="isFollow" outlined @click="unFollow">フォロー中</v-btn>
+              <v-btn v-else dark @click="follow">フォロー</v-btn>
+            </div>
           </div>
         </div>
 
@@ -45,11 +48,11 @@
             "
           >
             <div class="text-center pr-3">
-              <span class="font-bold">520</span
+              <span class="font-bold">{{fCnt.followingCnt}}</span
               ><span class="text-gray-600"> Following</span>
             </div>
             <div class="text-center px-3">
-              <span class="font-bolde">23,4m </span
+              <span class="font-bolde">{{fCnt.followerCnt}} </span
               ><span class="text-gray-600"> Followers</span>
             </div>
           </div>
@@ -60,6 +63,24 @@
 </template>
 <script>
 export default {
-  props: { userData: { type: Object, required: true } },
+  props: {
+    userData: { type: Object, required: true },
+    fCnt: { type: Object, required: true },
+    isFollow: { type: Boolean, default: false },
+  },
+
+  computed: {
+    isMine() {
+      return this.$store.state.userData.uid === this.$route.params.userID
+    },
+  },
+  methods: {
+    follow() {
+      this.$emit('follow')
+    },
+    unFollow() {
+      this.$emit('un-follow')
+    },
+  },
 }
 </script>
