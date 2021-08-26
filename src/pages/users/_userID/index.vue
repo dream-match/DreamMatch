@@ -9,14 +9,14 @@
       @un-follow="unFollow"
     /><v-divider />
 
-    <article>
+    <v-container class="mx-auto">
       <PostCard
         v-for="post in posts"
         :key="post.id"
         :post="post"
-        class="sm:mx-6 sm:my-3"
+        class="mx-6 my-3"
       />
-    </article>
+    </v-container>
     <v-btn v-if="isNext" @click="loadNextPosts">もっと読み込む</v-btn>
   </div>
 </template>

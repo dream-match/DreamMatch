@@ -142,14 +142,22 @@ export const actions = {
         .get()
       const posts = res.docs.map((d) => {
         const { id } = d
-        const { createdAt, description, title, titleImgPath, user, tags } =
-          d.data()
+        const {
+          createdAt,
+          description,
+          title,
+          titleImgPath,
+          user,
+          tags,
+          save,
+        } = d.data()
         return {
           id,
           tags,
           createdAt: createdAt.toDate(),
           description,
           title,
+          save,
           titleImgPath,
           user,
         }

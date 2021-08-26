@@ -1,14 +1,17 @@
 <template>
-  <v-card :tile="isSmallWin" :flat="isSmallWin">
+  <v-card :tile="isSmallWin" :flat="isSmallWin" class="mx-auto" max-width="900">
     <f-img :path="post.titleImgPath" max-height="250" class="relative">
       <div :class="[post.titleImgPath ? ' inline-block ' : '']">
         <v-card-title
           class="bg-gray-800 text-white pa-2"
           :class="[post.titleImgPath ? 'rounded-br-lg' : '']"
         >
-          <v-avatar class="mr-2" size="36">
-            <f-img :path="post.user.uploadedPhotoPath" />
-          </v-avatar>
+          <nuxt-link :to="`/users/${post.user.uid}`">
+            <v-avatar class="mr-2" size="36">
+              <f-img :path="post.user.uploadedPhotoPath" />
+            </v-avatar>
+          </nuxt-link>
+
           {{ post.user.displayName }}
           <span class="font-weight-regular text-body-1 ml-2">{{
             uploadedAt
@@ -36,9 +39,10 @@
         </v-card-subtitle>
       </div>
       <v-card-actions
+        v-if="content.blocks.length"
         class="absolute bottom-0 right-0 bg-gray-800 rounded-tl-lg"
       >
-        <v-btn icon @click="isOpen = !isOpen">
+        <v-btn icon @click="maContent">
           <v-icon color="white">
             {{ isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
           </v-icon>
@@ -46,6 +50,11 @@
       </v-card-actions>
     </f-img>
     <v-divider v-if="isSmallWin || isOpen" />
+    <v-expand-transition>
+      <article v-if="isOpen">
+        <v-card outlined><Content :doc="content" /></v-card>
+      </article>
+    </v-expand-transition>
   </v-card>
 </template>
 <script>
@@ -54,9 +63,13 @@ export default {
   components: { fImg },
   props: { post: { type: Object, required: true } },
   data: () => ({ isOpen: false }),
+
   computed: {
     isSmallWin() {
       return this.$vuetify.breakpoint.xs
+    },
+    content() {
+      return JSON.parse(this.post.save)
     },
     subtitle() {
       const text = this.post.description.slice(0, 140)
@@ -75,6 +88,11 @@ export default {
       } else {
         return u.getHours() + ':' + u.getMinutes()
       }
+    },
+  },
+  methods: {
+    maContent() {
+      this.isOpen = !this.isOpen
     },
   },
 }
