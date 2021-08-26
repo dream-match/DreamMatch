@@ -176,4 +176,34 @@ export const actions = {
     )
     commit('setPosts', await res.json())
   },
+  async getPost({ commit }, id) {
+    const res = await this.$fire.firestore.collection('posts').doc(id).get()
+
+    const { createdAt, description, title, titleImgPath, user, tags, save } =
+      res.data()
+    return {
+      id: res.id,
+      tags,
+      createdAt: createdAt.toDate(),
+      description,
+      title,
+      save,
+      titleImgPath,
+      user,
+    }
+  },
+  async postMessage({ rootState }, { id, message }) {
+    await this.$fire.firestore
+      .collection('posts')
+      .doc(id)
+      .collection('messages')
+      .add({ message, user: rootState.userData })
+  },
+  async getMessage({ commit }, id) {
+    const res = await this.$fire.firestore
+      .collection('posts')
+      .doc(id)
+      .collection('messages')
+    return res.docs.map((doc) => doc.data())
+  },
 }

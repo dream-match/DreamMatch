@@ -1,6 +1,6 @@
 <template>
-  <v-app-bar app flat color="white">
-    <v-btn v-if="isUsers" fab text small to="/">
+  <v-app-bar app flat dark>
+    <v-btn v-if="isUsers || isTweets" fab text small @click="$router.back()">
       <v-icon>mdi-chevron-left</v-icon>
     </v-btn>
     <v-avatar
@@ -20,6 +20,9 @@ import { mapState, mapMutations } from 'vuex'
 export default {
   computed: {
     title() {
+      if (this.isTweets) {
+        return '投稿'
+      }
       switch (this.$route.path) {
         case '/':
         case '/users':
@@ -34,6 +37,9 @@ export default {
     },
     isUsers() {
       return this.$route.path.includes('/users')
+    },
+    isTweets() {
+      return this.$route.path.includes('/posts')
     },
     drawer: {
       get() {

@@ -13,10 +13,12 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  css: [],
+  css: ['@/assets/main.scss'],
 
   plugins: ['~/plugins/init', { src: '~/plugins/editor', mode: 'client' }],
-
+  generate: {
+    fallback: true,
+  },
   components: [
     {
       path: '@/components',

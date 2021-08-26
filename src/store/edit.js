@@ -87,6 +87,7 @@ export const actions = {
         commit('setId', docRef.id)
         this.$router.push({ query: { id: docRef.id } })
       }
+      this.$router.push('/post')
     } catch (e) {
       console.error(e)
       commit('setErrCode', e.code)

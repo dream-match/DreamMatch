@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <v-card :tile="isSmallWin" :flat="isSmallWin">
+  <v-container class="mx-auto">
+    <v-card
+      :tile="isSmallWin"
+      :flat="isSmallWin"
+      max-width="800"
+      class="mx-auto"
+    >
       <v-card-actions>
         <v-spacer />
         <v-btn
@@ -94,7 +99,7 @@
         </v-card>
       </v-card-text>
     </v-card>
-  </div>
+  </v-container>
 </template>
 <script>
 export default {

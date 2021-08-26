@@ -1,5 +1,5 @@
 <template>
-  <v-card :tile="isSmallWin" :flat="isSmallWin" class="mx-auto" max-width="900">
+  <v-card class="mx-auto" max-width="900">
     <f-img :path="post.titleImgPath" max-height="250" class="relative">
       <div :class="[post.titleImgPath ? ' inline-block ' : '']">
         <v-card-title
@@ -18,31 +18,39 @@
           }}</span>
         </v-card-title>
       </div>
-      <div
-        class="bottom-0 left-0 bg-gray-800 text-white"
-        :class="[
-          post.titleImgPath
-            ? subtitle.length > 80
-              ? 'max-w-sm'
-              : 'max-w-xs'
-            : '',
-          post.titleImgPath ? 'absolute rounded-tr-lg inline-block' : '',
-        ]"
-      >
-        <v-card-title>{{ post.title }} </v-card-title>
+      <nuxt-link :to="`/posts/${post.id}`">
+        <div
+          class="bottom-0 left-0 bg-gray-800 text-white"
+          :class="[
+            post.titleImgPath
+              ? subtitle.length > 80
+                ? 'max-w-sm'
+                : 'max-w-xs'
+              : '',
+            post.titleImgPath ? 'absolute rounded-tr-lg inline-block' : '',
+          ]"
+        >
+          <v-card-title>{{ post.title }} </v-card-title>
 
-        <v-card-subtitle class="text-caption max-w-md">
-          <v-chip v-for="tag in post.tags" :key="tag" x-small class="mr-1">
-            {{ tag }}
-          </v-chip>
-          {{ subtitle }}
-        </v-card-subtitle>
-      </div>
+          <v-card-subtitle class="text-caption max-w-md">
+            <v-chip v-for="tag in post.tags" :key="tag" x-small class="mr-1">
+              {{ tag }}
+            </v-chip>
+            {{ subtitle }}
+          </v-card-subtitle>
+        </div>
+      </nuxt-link>
       <v-card-actions
-        v-if="content.blocks.length"
         class="absolute bottom-0 right-0 bg-gray-800 rounded-tl-lg"
       >
-        <v-btn icon @click="maContent">
+        <v-btn icon :href="getTweetPath">
+          <v-icon color="white"> mdi-twitter </v-icon>
+        </v-btn>
+        <v-btn
+          v-if="content.blocks.length && !isStartOpen"
+          icon
+          @click="maContent"
+        >
           <v-icon color="white">
             {{ isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
           </v-icon>
@@ -51,8 +59,8 @@
     </f-img>
     <v-divider v-if="isSmallWin || isOpen" />
     <v-expand-transition>
-      <article v-if="isOpen">
-        <v-card outlined><Content :doc="content" /></v-card>
+      <article v-if="isOpen || isStartOpen">
+        <v-card outlined class="p-2"><Content :doc="content" /></v-card>
       </article>
     </v-expand-transition>
   </v-card>
@@ -61,7 +69,10 @@
 import fImg from './f-img.vue'
 export default {
   components: { fImg },
-  props: { post: { type: Object, required: true } },
+  props: {
+    post: { type: Object, required: true },
+    isStartOpen: { type: Boolean, default: false },
+  },
   data: () => ({ isOpen: false }),
 
   computed: {
@@ -88,6 +99,11 @@ export default {
       } else {
         return u.getHours() + ':' + u.getMinutes()
       }
+    },
+    getTweetPath() {
+      return `https://twitter.com/intent/tweet?url=${
+        location.origin + this.$route.path
+      }&hashtags=DreamMatch`
     },
   },
   methods: {
