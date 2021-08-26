@@ -22,7 +22,7 @@ export default {
     to: { type: String, default: '' },
     maxHeight: { type: String, default: null },
     minHeight: { type: String, default: null },
-    width: { type: Number, default: null },
+    width: { type: String, default: null },
     contain: { type: Boolean, default: false },
   },
   data: () => ({ src: '', lazySrc: '' }),

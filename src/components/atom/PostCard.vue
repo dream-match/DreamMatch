@@ -29,30 +29,35 @@
           post.titleImgPath ? 'absolute rounded-tr-lg inline-block' : '',
         ]"
       >
-        <nuxt-link :to="`/posts/${post.id}`" class="white--text">
-          <v-card-title>{{ post.title }} </v-card-title>
-
-          <v-card-subtitle class="text-caption max-w-md">
-            <v-chip v-for="tag in post.tags" :key="tag" x-small class="mr-1">
-              {{ tag }}
-            </v-chip>
-            {{ subtitle }}
-          </v-card-subtitle>
-        </nuxt-link>
-        <div v-if="$vuetify.breakpoint.xs" class="bg-gray-800 pl-2 pb-2">
-          <v-btn icon :href="getTweetPath">
-            <v-icon color="white"> mdi-twitter </v-icon>
-          </v-btn>
-          <v-btn
-            v-if="content.blocks.length && !isStartOpen"
-            icon
-            @click="maContent"
+        <v-list-item>
+          <nuxt-link :to="`/posts/${post.id}`" class="white--text">
+            <v-card-title>{{ post.title }} </v-card-title>
+            <v-card-subtitle class="text-caption max-w-md">
+              <v-chip v-for="tag in post.tags" :key="tag" x-small class="mr-1">
+                {{ tag }}
+              </v-chip>
+              {{ subtitle }}
+            </v-card-subtitle>
+          </nuxt-link>
+          <v-spacer />
+          <v-list-item-action
+            v-if="$vuetify.breakpoint.xs"
+            class="bg-gray-800 p-2"
           >
-            <v-icon color="white">
-              {{ isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
-            </v-icon>
-          </v-btn>
-        </div>
+            <v-btn icon :href="getTweetPath">
+              <v-icon color="white"> mdi-twitter </v-icon>
+            </v-btn>
+            <v-btn
+              v-if="content.blocks.length && !isStartOpen"
+              icon
+              @click="maContent"
+            >
+              <v-icon color="white">
+                {{ isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
+              </v-icon>
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
       </div>
 
       <v-card-actions
@@ -73,7 +78,7 @@
         </v-btn>
       </v-card-actions>
     </f-img>
-    <v-divider v-if="isSmallWin || isOpen" />
+    <v-divider v-if="isOpen" />
     <v-expand-transition>
       <article v-if="isOpen || isStartOpen">
         <v-card outlined class=""><Content :doc="content" /></v-card>
