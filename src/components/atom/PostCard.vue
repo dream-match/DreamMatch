@@ -78,10 +78,9 @@
         </v-btn>
       </v-card-actions>
     </f-img>
-    <v-divider v-if="isOpen" />
     <v-expand-transition>
       <article v-if="isOpen || isStartOpen">
-        <v-card outlined class=""><Content :doc="content" /></v-card>
+        <Content :doc="content" />
       </article>
     </v-expand-transition>
   </v-card>

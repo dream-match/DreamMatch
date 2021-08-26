@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app flat dark>
+  <v-app-bar app flat dark color="dark.primary">
     <v-btn v-if="isUsers || isTweets" fab text small @click="$router.back()">
       <v-icon>mdi-chevron-left</v-icon>
     </v-btn>

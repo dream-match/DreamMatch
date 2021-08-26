@@ -193,6 +193,11 @@ export const actions = {
     }
   },
   async postMessage({ rootState }, { id, message }) {
+    const s = message.replace(/\s/g, '')
+    if (!s) {
+      return
+    }
+
     await this.$fire.firestore
       .collection('posts')
       .doc(id)
@@ -204,6 +209,7 @@ export const actions = {
       .collection('posts')
       .doc(id)
       .collection('messages')
-    return res.docs.map((doc) => doc.data())
+      .get()
+    return res.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
   },
 }

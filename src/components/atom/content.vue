@@ -15,13 +15,16 @@ export default {
 </script>
 <style  lang="scss" scoped>
 .content-root {
+  background-color: #121212;
+  @apply p-2;
   h2 {
     @apply text-4xl p-0 m-0;
   }
+
   pre {
     border-radius: 5px;
     padding: 3px;
-    background: #222;
+    background: #1f1f1f;
     color: white;
     overflow-x: scroll;
   }

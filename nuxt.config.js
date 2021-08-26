@@ -1,3 +1,4 @@
+// import colors from 'vuetify/lib/util/colors'
 export default {
   target: 'static',
 
@@ -72,6 +73,9 @@ export default {
       },
       storage: true,
     },
+  },
+  vuetify: {
+    theme: { dark: true },
   },
 
   build: {},
