@@ -17,7 +17,7 @@
       </v-subheader>
 
       <v-list dense>
-        <v-list-item link>
+        <v-list-item link :to="`/users/${userData.uid}`">
           <v-list-item-avatar color="blue-grey lighten-3">
             <f-img
               :path="userData.uploadedPhotoPath || userData.photoURL"

@@ -1,6 +1,6 @@
 <template>
-  <v-card class="mx-auto" max-width="900">
-    <f-img :path="post.titleImgPath" max-height="250" class="relative">
+  <v-card class="mx-auto" max-width="900" flat>
+    <f-img :path="post.titleImgPath" max-height="280" class="relative">
       <div :class="[post.titleImgPath ? ' inline-block ' : '']">
         <v-card-title
           class="bg-gray-800 text-white pa-2"
@@ -18,18 +18,18 @@
           }}</span>
         </v-card-title>
       </div>
-      <nuxt-link :to="`/posts/${post.id}`">
-        <div
-          class="bottom-0 left-0 bg-gray-800 text-white"
-          :class="[
-            post.titleImgPath
-              ? subtitle.length > 80
-                ? 'max-w-sm'
-                : 'max-w-xs'
-              : '',
-            post.titleImgPath ? 'absolute rounded-tr-lg inline-block' : '',
-          ]"
-        >
+      <div
+        class="bottom-0 left-0 bg-gray-800 text-white"
+        :class="[
+          post.titleImgPath
+            ? subtitle.length > 80
+              ? 'max-w-xs sm:max-w-sm'
+              : 'max-w-xs '
+            : '',
+          post.titleImgPath ? 'absolute rounded-tr-lg inline-block' : '',
+        ]"
+      >
+        <nuxt-link :to="`/posts/${post.id}`" class="white--text">
           <v-card-title>{{ post.title }} </v-card-title>
 
           <v-card-subtitle class="text-caption max-w-md">
@@ -38,9 +38,25 @@
             </v-chip>
             {{ subtitle }}
           </v-card-subtitle>
+        </nuxt-link>
+        <div v-if="$vuetify.breakpoint.xs" class="bg-gray-800 pl-2 pb-2">
+          <v-btn icon :href="getTweetPath">
+            <v-icon color="white"> mdi-twitter </v-icon>
+          </v-btn>
+          <v-btn
+            v-if="content.blocks.length && !isStartOpen"
+            icon
+            @click="maContent"
+          >
+            <v-icon color="white">
+              {{ isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
+            </v-icon>
+          </v-btn>
         </div>
-      </nuxt-link>
+      </div>
+
       <v-card-actions
+        v-if="!$vuetify.breakpoint.xs"
         class="absolute bottom-0 right-0 bg-gray-800 rounded-tl-lg"
       >
         <v-btn icon :href="getTweetPath">
@@ -60,7 +76,7 @@
     <v-divider v-if="isSmallWin || isOpen" />
     <v-expand-transition>
       <article v-if="isOpen || isStartOpen">
-        <v-card outlined class="p-2"><Content :doc="content" /></v-card>
+        <v-card outlined class=""><Content :doc="content" /></v-card>
       </article>
     </v-expand-transition>
   </v-card>
