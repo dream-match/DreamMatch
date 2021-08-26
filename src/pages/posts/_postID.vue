@@ -3,7 +3,7 @@
     <v-card max-width="900" flat>
       <PostCard v-if="post" :post="post" is-start-open />
     </v-card>
-    <v-card>
+    <v-card flat>
       <v-card-title>コメント</v-card-title>
       <v-card-text>
         <v-textarea outlined name="コメント送信" label="コメントを送信">
