@@ -23,6 +23,7 @@ export default {
     padding: 3px;
     background: #222;
     color: white;
+    overflow-x: scroll;
   }
 }
 </style>
