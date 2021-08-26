@@ -5,6 +5,8 @@ export const state = () => ({
     photoURL: '',
     email: '',
     name: '',
+    prof: '',
+    skills: '',
     uploadedPhotoPath: '',
   },
   bar: '',
@@ -47,12 +49,13 @@ export const actions = {
           .get()
           .then((d) => {
             if (d.exists) {
-              const { uploadedPhotoPath, skills } = d.data()
+              const { uploadedPhotoPath, skills, prof } = d.data()
 
               commit('setUserData', {
                 ...state.userData,
                 uploadedPhotoPath,
                 skills,
+                prof,
               })
             }
           })

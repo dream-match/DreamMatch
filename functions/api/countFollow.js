@@ -1,8 +1,6 @@
 const functions = require('firebase-functions')
 const cors = require('cors')({ origin: true })
-const admin = require('firebase-admin')
-admin.initializeApp()
-const db = admin.firestore()
+const { db } = require('../app')
 
 module.exports = functions
   .region('asia-northeast1')

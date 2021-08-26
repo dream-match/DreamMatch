@@ -1,13 +1,25 @@
 <template>
   <client-only>
-    <v-img :src="src" :lazy-src="lazySrc" :height="height"><slot /></v-img
-  ></client-only>
+    <v-img
+      :src="src"
+      :lazy-src="lazySrc"
+      :height="height"
+      :to="to"
+      :max-height="maxHeight"
+      :min-height="minHeight"
+    >
+      <slot />
+    </v-img>
+  </client-only>
 </template>
 <script>
 export default {
   props: {
     path: { type: String, default: '' },
     height: { type: String, default: null },
+    to: { type: String, default: '' },
+    maxHeight: { type: String, default: null },
+    minHeight: { type: String, default: null },
   },
   data: () => ({ src: '', lazySrc: '' }),
   computed: {
@@ -36,6 +48,7 @@ export default {
             } catch (e) {
               await this.getSrcUrl()
             }
+            // console.log(this.src, this.lazySrc)
           }
         } else {
           this.src = v
@@ -52,14 +65,14 @@ export default {
 
       const getSrc = async () => {
         const nameAry = name.split('.')
-        nameAry[0] += '_1280x720'
-        const resizedPath = `${root}/${nameAry.join('.')}`
+        nameAry.pop()
+        const resizedPath = `${root}/${nameAry.join('.') + '_1280x720.webp'}`
         this.src = await this.$fire.storage.ref(resizedPath).getDownloadURL()
       }
       const getLazySrc = async () => {
         const nameAry = name.split('.')
-        nameAry[0] += '_320x240'
-        const resizedPath = `${root}/${nameAry.join('.')}`
+        nameAry.pop()
+        const resizedPath = `${root}/${nameAry.join('.') + '_320x240.webp'}`
         this.lazySrc = await this.$fire.storage
           .ref(resizedPath)
           .getDownloadURL()

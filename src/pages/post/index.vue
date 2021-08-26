@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-card
       v-for="post in posts"
       :key="post.id"
@@ -51,7 +51,7 @@
     >
       <v-icon> mdi-plus </v-icon>
     </v-btn>
-  </div>
+  </v-container>
 </template>
 <script>
 import { mapState } from 'vuex'

@@ -1,14 +1,23 @@
 <template>
   <div>
-    <client-only>
-      <UserProfile
-        :user-data="userData"
-        :f-cnt="fCnt"
-        :is-follow="isFollow"
-        @follow="follow"
-        @un-follow="unFollow"
-      /><v-divider />
-    </client-only>
+    <UserProfile
+      :user-data="userData"
+      :f-cnt="fCnt"
+      :is-follow="isFollow"
+      :uid="$route.params.userID"
+      @follow="follow"
+      @un-follow="unFollow"
+    /><v-divider />
+
+    <article>
+      <PostCard
+        v-for="post in posts"
+        :key="post.id"
+        :post="post"
+        class="sm:mx-6 sm:my-3"
+      />
+    </article>
+    <v-btn v-if="isNext" @click="loadNextPosts">もっと読み込む</v-btn>
   </div>
 </template>
 
@@ -21,8 +30,13 @@ export default {
       return redirect('/')
     }
   },
-  data: () => ({ fCnt: {}, isFollow: false }),
-  computed: { ...mapState('user', ['userData']) },
+  data: () => ({ fCnt: {}, isFollow: false, page: 2 }),
+  computed: {
+    isNext() {
+      return this.posts.length > (this.page - 1) * 50
+    },
+    ...mapState('user', ['userData', 'posts']),
+  },
   async mounted() {
     const loadMain = async () => {
       await this.$store.dispatch('user/getUserData', this.$route.params.userID)
@@ -44,6 +58,7 @@ export default {
       )
     }
 
+    this.$store.dispatch('user/getFirstPosts', this.$route.params.userID)
     await Promise.all([loadMain(), laodFcnt(), loadIsFollow()])
   },
   methods: {
@@ -56,6 +71,13 @@ export default {
       console.log('unfollow')
       await this.$store.dispatch('user/unFollow', this.$route.params.userID)
       this.isFollow = false
+    },
+    async loadNextPosts() {
+      await this.$store.dispatch('user/getPosts', {
+        uid: this.$route.params.userID,
+        page: this.page,
+      })
+      this.page++
     },
   },
 }
