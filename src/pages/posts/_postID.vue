@@ -7,6 +7,7 @@
       <v-card-title>コメント</v-card-title>
       <v-card-text>
         <v-textarea
+          v-if="$store.isLogin"
           v-model="message"
           outlined
           name="コメント送信"
@@ -14,7 +15,9 @@
           :loading="uploading"
         >
         </v-textarea>
-        <v-btn color="primary" @click="postMessage">送信</v-btn>
+        <v-btn v-if="$store.isLogin" color="primary" @click="postMessage">
+          送信
+        </v-btn>
         <v-card flat>
           <v-list three-line>
             <v-list-item v-for="msg in messages" :key="msg.id">

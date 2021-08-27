@@ -20,10 +20,12 @@
               <v-btn outlined>プロフィール編集</v-btn>
             </div>
             <div v-else>
-              <v-btn v-if="isFollow" outlined @click="unFollow">
-                フォロー中
-              </v-btn>
-              <v-btn v-else dark @click="follow">フォロー</v-btn>
+              <div v-if="$store.isLogin">
+                <v-btn v-if="isFollow" outlined @click="unFollow">
+                  フォロー中
+                </v-btn>
+                <v-btn v-else dark @click="follow">フォロー</v-btn>
+              </div>
             </div>
           </div>
         </div>
@@ -32,7 +34,7 @@
           <div>
             <h2 class="text-xl leading-6 font-bold">
               {{ userData.name }}
-              <v-chip v-if="isFollow" small class="font-weight-medium ml-2">
+              <v-chip v-if="isFollower" small class="font-weight-medium ml-2">
                 フォローされています
               </v-chip>
             </h2>

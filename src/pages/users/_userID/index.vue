@@ -1,14 +1,15 @@
 <template>
   <div>
-    <UserProfile
-      :user-data="userData"
-      :f-cnt="fCnt"
-      :is-follow="isFollow"
-      :uid="$route.params.userID"
-      @follow="follow"
-      @un-follow="unFollow"
-    /><v-divider />
-
+    <client-only>
+      <UserProfile
+        :user-data="userData"
+        :f-cnt="fCnt"
+        :is-follow="isFollow"
+        :uid="$route.params.userID"
+        @follow="follow"
+        @un-follow="unFollow"
+      /><v-divider />
+    </client-only>
     <v-container class="mx-auto">
       <PostCard
         v-for="post in posts"

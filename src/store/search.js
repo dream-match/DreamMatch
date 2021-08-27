@@ -47,7 +47,7 @@ export const actions = {
     const res = await query.limit(50).get()
     const result = res.docs.map((doc) => {
       const { createdAt } = doc.data()
-      return { ...doc.data(), createdAt: createdAt.toDate() }
+      return { ...doc.data(), createdAt: createdAt.toDate(), id: doc.id }
     })
     return result
   },

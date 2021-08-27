@@ -9,6 +9,7 @@ export const state = () => ({
     skills: '',
     uploadedPhotoPath: '',
   },
+  isLogin: false,
   bar: '',
 })
 
@@ -22,6 +23,9 @@ export const mutations = {
   setBarText(state, text) {
     state.bar = text
   },
+  setLogin(state, v) {
+    state.isLogin = v
+  },
 }
 
 export const actions = {
@@ -34,6 +38,7 @@ export const actions = {
     }
     this.$fire.auth.onAuthStateChanged((user) => {
       if (user) {
+        commit('setLogin', true)
         const { uid, photoURL, email, displayName } = user
         commit('setUserData', {
           ...state.userData,

@@ -17,10 +17,23 @@ export default {
 .content-root {
   background-color: #1f2937;
   @apply p-2;
-  h2 {
-    @apply text-4xl p-0 m-0;
+  h1 {
+    font-size: 2.5rem;
+    border-bottom: 2px solid;
+    &::first-letter {
+      font-size: 1.25em;
+    }
   }
 
+  h2 {
+    font-size: 2.125rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+  }
   pre {
     border-radius: 5px;
     padding: 3px;

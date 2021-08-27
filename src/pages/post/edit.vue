@@ -1,6 +1,7 @@
 <template>
   <v-container class="mx-auto">
     <v-card
+      dark
       :tile="isSmallWin"
       :flat="isSmallWin"
       max-width="800"
@@ -82,7 +83,7 @@
             <v-tab>Write</v-tab>
             <v-tab>Preview</v-tab>
           </v-tabs>
-          <v-card-text class="black--text">
+          <v-card-text>
             <v-tabs-items v-model="tab">
               <v-tab-item>
                 <Editor

@@ -113,6 +113,7 @@ export const actions = {
   },
 
   async isFollow({ rootState }, id, from) {
+    if (!rootState.userData.uid) return false
     const follow = await this.$fire.firestore
       .collection('users')
       .doc(from || rootState.userData.uid)
@@ -123,6 +124,7 @@ export const actions = {
     return !follow.empty
   },
   async isFollower({ rootState }, id, from) {
+    if (!rootState.userData.uid) return false
     const follow = await this.$fire.firestore
       .collection('users')
       .doc(from || rootState.userData.uid)
