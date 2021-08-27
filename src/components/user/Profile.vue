@@ -6,10 +6,10 @@
         <div class="relative flex w-full">
           <div class="flex flex-1">
             <div style="margin-top: -6rem">
-              <v-avatar size="140">
+              <v-avatar size="140" color="blue-grey lighten-3">
                 <f-img
                   class="md rounded-full relative border-2 border-white"
-                  :path="userData.uploadedPhotoPath || userData.photoURL"
+                  :path="userData.uploadedPhotoPath"
                 />
               </v-avatar>
             </div>
@@ -17,10 +17,28 @@
 
           <div class="flex flex-col text-right">
             <div v-if="isMine">
-              <v-btn outlined>プロフィール編集</v-btn>
+              <v-btn v-if="userData.twitter" icon :href="userData.twitter">
+                <v-icon>mdi-twitter</v-icon>
+              </v-btn>
+              <v-btn v-if="userData.github" icon :href="userData.github">
+                <v-icon>mdi-github</v-icon>
+              </v-btn>
+              <v-btn v-if="userData.url" icon :href="userData.url">
+                <v-icon>mdi-palette</v-icon>
+              </v-btn>
+              <v-btn outlined to="/setting">プロフィール編集</v-btn>
             </div>
             <div v-else>
-              <div v-if="$store.isLogin">
+              <div v-if="$store.state.isLogin">
+                <v-btn v-if="userData.twitter" icon :href="userData.twitter">
+                  <v-icon>mdi-twitter</v-icon>
+                </v-btn>
+                <v-btn v-if="userData.github" icon :href="userData.github">
+                  <v-icon>mdi-github</v-icon>
+                </v-btn>
+                <v-btn v-if="userData.url" icon :href="userData.url">
+                  <v-icon>mdi-palette</v-icon>
+                </v-btn>
                 <v-btn v-if="isFollow" outlined @click="unFollow">
                   フォロー中
                 </v-btn>
@@ -69,12 +87,12 @@
             <v-dialog v-model="dialog" width="700">
               <template #activator="{ on, attrs }">
                 <div class="text-center pr-3" v-bind="attrs" v-on="on">
-                  <span class="font-bold">{{ fCnt.followingCnt }}</span
-                  ><span class="text-gray-600"> Following</span>
+                  <span class="font-bold">{{ fCnt.followingCnt }}</span>
+                  <span class="text-gray-600"> Following</span>
                 </div>
                 <div class="text-center px-3" v-bind="attrs" v-on="on">
-                  <span class="font-bolde">{{ fCnt.followerCnt }} </span
-                  ><span class="text-gray-600"> Followers</span>
+                  <span class="font-bolde">{{ fCnt.followerCnt }} </span>
+                  <span class="text-gray-600"> Followers</span>
                 </div>
               </template>
               <UserFollowInfo :uid="uid" />

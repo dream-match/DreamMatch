@@ -7,15 +7,15 @@
           :class="[post.titleImgPath ? 'rounded-br-lg' : '']"
         >
           <nuxt-link :to="`/users/${post.user.uid}`">
-            <v-avatar class="mr-2" size="36">
+            <v-avatar class="mr-2" size="36" color="blue-grey lighten-3">
               <f-img :path="post.user.uploadedPhotoPath" />
             </v-avatar>
           </nuxt-link>
 
           {{ post.user.displayName }}
-          <span class="font-weight-regular text-body-1 ml-2">{{
-            uploadedAt
-          }}</span>
+          <span class="font-weight-regular text-body-1 ml-2">
+            {{ uploadedAt }}
+          </span>
         </v-card-title>
       </div>
       <div

@@ -64,6 +64,8 @@ export const actions = {
               })
             }
           })
+      } else {
+        localStorage.removeItem('uid')
       }
     })
   },

@@ -12,7 +12,7 @@ module.exports = functions
           const title = result.title
           const description = result.ogp['og:description']
           const imageUrl = result.ogp['og:image']
-          res.set('Cache-Control', 'public, max-age=60').json({
+          res.set('Cache-Control', 'public, max-age=3600').json({
             success: 1,
             meta: {
               title,

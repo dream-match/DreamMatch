@@ -2,7 +2,7 @@
   <v-list-item>
     <nuxt-link :to="`/users/${userData.uid}`">
       <v-list-item-avatar color="blue-grey lighten-3" size="48" class="mr-6">
-        <f-img :path="userData.uploadedPhotoPath || userData.photoURL" />
+        <f-img :path="userData.uploadedPhotoPath" />
       </v-list-item-avatar>
     </nuxt-link>
     <v-list-item-content>

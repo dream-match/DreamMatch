@@ -4,6 +4,10 @@ const { db } = require('../app')
 
 module.exports = functions
   .region('asia-northeast1')
+  .runWith({
+    timeoutSeconds: 30,
+    memory: '128MB',
+  })
   .https.onRequest((req, res) => {
     cors(req, res, async () => {
       try {

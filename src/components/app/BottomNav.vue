@@ -1,27 +1,33 @@
 <template>
-  <v-bottom-navigation v-model="value" :background-color="color" dark shift app>
-    <v-btn>
-      <span>Video</span>
+  <v-bottom-navigation
+    v-if="$vuetify.breakpoint.xs"
+    v-model="value"
+    :background-color="color"
+    dark
+    shift
+    app
+  >
+    <v-btn to="/">
+      <span>Home</span>
 
-      <v-icon>mdi-television-play</v-icon>
+      <v-icon>mdi-home</v-icon>
     </v-btn>
 
-    <v-btn>
-      <span>Music</span>
-
-      <v-icon>mdi-music-note</v-icon>
+    <v-btn to="/search">
+      <span>Search</span>
+      <v-icon>mdi-magnify</v-icon>
     </v-btn>
 
-    <v-btn>
-      <span>Book</span>
+    <v-btn to="/post">
+      <span>Write</span>
 
-      <v-icon>mdi-book</v-icon>
+      <v-icon>mdi-lead-pencil</v-icon>
     </v-btn>
 
-    <v-btn>
-      <span>Image</span>
+    <v-btn to="setting">
+      <span>Setting</span>
 
-      <v-icon>mdi-image</v-icon>
+      <v-icon>mdi-cog</v-icon>
     </v-btn>
   </v-bottom-navigation>
 </template>

@@ -9,10 +9,7 @@
   >
     <v-list-item class="px-2" :to="`/users/${userData.uid}`">
       <v-avatar size="40" color="blue-grey lighten-3">
-        <f-img
-          :path="userData.uploadedPhotoPath || userData.photoURL"
-          @click="drawer = !drawer"
-        />
+        <f-img :path="userData.uploadedPhotoPath" @click="drawer = !drawer" />
       </v-avatar>
     </v-list-item>
     <v-divider></v-divider>
@@ -20,11 +17,7 @@
       <v-list-item nuxt to="/">
         <v-icon>mdi-home</v-icon>
       </v-list-item>
-      <v-list-item
-        v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.sm"
-        nuxt
-        to="/search"
-      >
+      <v-list-item nuxt to="/search">
         <v-icon>mdi-magnify</v-icon>
       </v-list-item>
       <v-list-item nuxt to="/post">

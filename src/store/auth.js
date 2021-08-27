@@ -55,11 +55,8 @@ export const actions = {
       const user = this.$fire.auth.currentUser
       let uploadedPath = ''
       if (input.imageFile) {
-        uploadedPath = `/images/profile/${user.uid}`
-        await this.$fire.storage
-          .ref()
-          .child(`/images/profile/${input.imageFile.name}`)
-          .put(input.imageFile)
+        uploadedPath = `/images/profile/${user.uid}/${input.imageFile.name}`
+        await this.$fire.storage.ref().child(uploadedPath).put(input.imageFile)
       }
       await user.updateProfile({
         displayName: input.name,

@@ -92,8 +92,8 @@
             </v-card-text>
             <v-card-actions>
               <v-btn color="primary" :loading="loading" @click="submit">
-                登録</v-btn
-              >
+                登録
+              </v-btn>
 
               <v-btn text to="/"> Cancel </v-btn>
             </v-card-actions>

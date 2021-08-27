@@ -31,6 +31,10 @@ export const actions = {
         uploadedPhotoPath,
         prof,
         skills,
+        headerImg,
+        twitter,
+        github,
+        url,
         name,
       } = res.data()
 
@@ -41,6 +45,10 @@ export const actions = {
         displayName,
         skills: [...Object.keys(skills)],
         uploadedPhotoPath,
+        headerImg,
+        twitter,
+        github,
+        url,
         prof,
         name,
       })
