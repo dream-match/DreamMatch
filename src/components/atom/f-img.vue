@@ -35,27 +35,30 @@ export default {
     path: {
       immediate: true,
       async handler(v) {
-        if (!v) return
+        try {
+          if (!v) return
 
-        const isURL =
-          /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-/]))?/
+          const isURL = /http/g
 
-        if (!isURL.test(v)) {
-          const imageUrlCache = localStorage.getItem(v)
-          if (imageUrlCache) {
-            const { src, lazySrc } = JSON.parse(imageUrlCache)
-            this.src = src
-            this.lazySrc = lazySrc
-          } else {
-            try {
-              await this.getResizedUrl(v)
-            } catch (e) {
-              await this.getSrcUrl()
+          if (!isURL.test(v)) {
+            const imageUrlCache = localStorage.getItem(v)
+            if (imageUrlCache) {
+              const { src, lazySrc } = JSON.parse(imageUrlCache)
+              this.src = src
+              this.lazySrc = lazySrc
+            } else {
+              try {
+                await this.getResizedUrl(v)
+              } catch (e) {
+                await this.getSrcUrl()
+              }
+              // console.log(this.src, this.lazySrc)
             }
-            // console.log(this.src, this.lazySrc)
+          } else {
+            this.src = v
           }
-        } else {
-          this.src = v
+        } catch (e) {
+          console.log(e)
         }
       },
     },

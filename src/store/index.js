@@ -54,7 +54,7 @@ export const actions = {
               commit('setUserData', {
                 ...state.userData,
                 uploadedPhotoPath,
-                skills,
+                skills: [...Object.keys(skills)],
                 prof,
               })
             }

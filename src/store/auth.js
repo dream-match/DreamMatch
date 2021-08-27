@@ -58,20 +58,26 @@ export const actions = {
         uploadedPath = `/images/profile/${user.uid}`
         await this.$fire.storage
           .ref()
-          .child(`/images/profile/${user.uid}`)
+          .child(`/images/profile/${input.imageFile.name}`)
           .put(input.imageFile)
       }
       await user.updateProfile({
         displayName: input.name,
       })
       const { uid, photoURL, email, displayName } = user
+
+      const skillsObj = input.skill.reduce((b, v) => {
+        b[v] = true
+        return b
+      }, {})
+
       await this.$fire.firestore
         .collection('users')
         .doc(user.uid)
         .set(
           {
             prof: input.prof,
-            skills: input.skill,
+            skills: skillsObj,
             uid,
             photoURL,
             email,
@@ -84,7 +90,13 @@ export const actions = {
           { merge: true }
         )
 
-      commit('setUser', { uid, photoURL, email, name: displayName })
+      commit('setUser', {
+        uid,
+        photoURL,
+        email,
+        name: displayName,
+        uploadedPath,
+      })
       commit('addRegisterStep')
     } catch (e) {
       console.error(e)

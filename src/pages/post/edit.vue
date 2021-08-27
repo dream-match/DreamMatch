@@ -63,7 +63,7 @@
               :input-value="selected"
               close
               @click="select"
-              @click:close="remove(item)"
+              @click:close="removeTag(item)"
             >
               <strong>{{ item }}</strong>
             </v-chip>
@@ -137,12 +137,12 @@ export default {
       save = '{}',
     } = this.$store.state.edit.saveData
     this.forLoad = JSON.parse(save)
-    this.input = { ...this.input, title, tags, description }
+    this.input = { ...this.input, title, tags: [...tags], description }
   },
   methods: {
     removeTag(name) {
       this.input.tags.splice(this.input.tags.indexOf(name), 1)
-      this.input.tags = [...this.input.tsgs]
+      this.input.tags = [...this.input.tags]
     },
     setSavedata(v) {
       this.input.save = v

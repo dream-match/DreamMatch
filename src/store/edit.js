@@ -35,7 +35,7 @@ export const actions = {
           const { title, tags, description, save } = res.data()
           return {
             title,
-            tags,
+            tags: [...Object.keys(tags)],
             description,
             save,
             updateAt: this.$fireModule.firestore.FieldValue.serverTimestamp(),
@@ -75,15 +75,20 @@ export const actions = {
       user: rootState.userData,
     })
     try {
+      const { tags } = state.saveData
+      const tagsObj = tags.reduce((b, v) => {
+        b[v] = true
+        return b
+      }, {})
       if (state.id) {
         await this.$fire.firestore
           .collection('posts')
           .doc(state.id)
-          .set(state.saveData, { merge: true })
+          .set({ ...state.saveData, tags: tagsObj }, { merge: true })
       } else {
         const docRef = await this.$fire.firestore
           .collection('posts')
-          .add(state.saveData)
+          .add({ ...state.saveData, tags: tagsObj })
         commit('setId', docRef.id)
         this.$router.push({ query: { id: docRef.id } })
       }

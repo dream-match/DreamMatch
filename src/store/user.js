@@ -39,7 +39,7 @@ export const actions = {
         photoURL,
         email,
         displayName,
-        skills,
+        skills: [...Object.keys(skills)],
         uploadedPhotoPath,
         prof,
         name,
@@ -202,13 +202,18 @@ export const actions = {
       .collection('posts')
       .doc(id)
       .collection('messages')
-      .add({ message, user: rootState.userData })
+      .add({
+        message,
+        user: rootState.userData,
+        createdAt: this.$fireModule.firestore.FieldValue.serverTimestamp(),
+      })
   },
   async getMessage({ commit }, id) {
     const res = await this.$fire.firestore
       .collection('posts')
       .doc(id)
       .collection('messages')
+      .orderBy('createdAt', 'desc')
       .get()
     return res.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
   },

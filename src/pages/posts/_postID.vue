@@ -49,6 +49,9 @@ export default {
       'user/getPost',
       this.$route.params.postID
     )
+    if (!this.post) {
+      this.$router.push('/')
+    }
     this.messages = await this.$store.dispatch('user/getMessage', this.post.id)
   },
   methods: {
@@ -58,7 +61,6 @@ export default {
         id: this.post.id,
         message: this.message,
       })
-      this.messages.push(this.message)
       this.message = ''
       this.uploading = false
     },

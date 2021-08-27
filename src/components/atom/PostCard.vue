@@ -33,7 +33,7 @@
           <nuxt-link :to="`/posts/${post.id}`" class="white--text">
             <v-card-title>{{ post.title }} </v-card-title>
             <v-card-subtitle class="text-caption max-w-md">
-              <v-chip v-for="tag in post.tags" :key="tag" x-small class="mr-1">
+              <v-chip v-for="tag in tags" :key="tag" x-small class="mr-1">
                 {{ tag }}
               </v-chip>
               {{ subtitle }}
@@ -124,6 +124,9 @@ export default {
       return `https://twitter.com/intent/tweet?url=${
         location.origin + this.$route.path
       }&hashtags=DreamMatch`
+    },
+    tags() {
+      return [...Object.keys(this.post.tags)]
     },
   },
   methods: {

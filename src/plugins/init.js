@@ -1,4 +1,3 @@
 export default async ({ store }) => {
-    await store.dispatch('getUserData')
-
+  await store.dispatch('getUserData')
 }

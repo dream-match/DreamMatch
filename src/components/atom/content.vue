@@ -15,7 +15,7 @@ export default {
 </script>
 <style  lang="scss" scoped>
 .content-root {
-  background-color: #121212;
+  background-color: #1f2937;
   @apply p-2;
   h2 {
     @apply text-4xl p-0 m-0;

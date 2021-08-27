@@ -1,19 +1,21 @@
 <template>
-  <v-btn
-    fab
-    large
-    right
-    fixed
-    darl
-    color="primary"
-    :to="`/post/edit`"
-    class="plusBtn"
-  >
-    <v-icon> mdi-plus </v-icon>
-  </v-btn>
+  <v-container>
+    <PostCard
+      v-for="post in posts"
+      :key="post.id"
+      :post="post"
+      class="mx-6 my-3"
+    />
+  </v-container>
 </template>
-<style scoped>
-.plusBtn {
-  bottom: 80px;
+<script>
+import { mapState } from 'vuex'
+export default {
+  computed: { ...mapState('home', ['posts']) },
+  mounted() {
+    this.$store.dispatch('home/getFollowing')
+  },
 }
-</style>
+</script>
+
+

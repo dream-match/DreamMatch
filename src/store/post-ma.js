@@ -1,9 +1,3 @@
-const formatOptions = {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-}
 export const state = () => ({ posts: [] })
 
 export const mutations = {
@@ -24,12 +18,9 @@ export const actions = {
           if (res) {
             const posts = res.docs.map((d) => {
               const { id } = d
-              const { createdAt, description, title, titleImgPath } = d.data()
+              const { description, title, titleImgPath } = d.data()
               return {
                 id,
-                createdAt: createdAt
-                  .toDate()
-                  .toLocaleDateString('ja-JP', formatOptions),
                 description,
                 title,
                 titleImgPath,
@@ -45,8 +36,6 @@ export const actions = {
   async deletePost({ commit }, id) {
     try {
       await this.$fire.firestore.collection('posts').doc(id).delete()
-    } catch (e) {
-      console.error(e)
-    }
+    } catch (e) {}
   },
 }
