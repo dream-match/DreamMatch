@@ -1,6 +1,6 @@
 // import colors from 'vuetify/lib/util/colors'
 export default {
-  target: 'spa',
+  target: 'ssr',
 
   head: {
     titleTemplate: '%s - sns',

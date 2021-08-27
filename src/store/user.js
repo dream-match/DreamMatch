@@ -61,8 +61,7 @@ export const actions = {
       const usersRef = this.$fire.firestore.collection('users')
       const res = await usersRef.doc(id).get()
       if (res) {
-        const { name, prof, skills, photoURL, uploadedPhotoPath, uid } =
-          res.data()
+        const { name, prof, skills, uploadedPhotoPath, uid } = res.data()
         await usersRef
           .doc(id)
           .collection('follower')
@@ -72,7 +71,14 @@ export const actions = {
           .doc(rootState.userData.uid)
           .collection('following')
           .doc(id)
-          .set({ name, prof, skills, photoURL, uploadedPhotoPath, uid })
+          .set({
+            name,
+            prof,
+            skills: [...Object.keys(skills)],
+
+            uploadedPhotoPath,
+            uid,
+          })
       }
     } catch (err) {
       console.error(err)
