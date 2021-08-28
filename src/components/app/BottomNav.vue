@@ -17,7 +17,7 @@
     </v-btn>
     <v-btn to="/post">
       <span>Write</span>
-      <v-icon small>mdi-lead-pencil</v-icon>
+      <v-icon>mdi-lead-pencil</v-icon>
     </v-btn>
     <v-btn to="/messages">
       <span>Chat</span>
