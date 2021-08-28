@@ -101,7 +101,7 @@ export const actions = {
   },
   async getFCnt({ commit }, id) {
     const res = await fetch(
-      `https://asia-northeast1-snstest-9f2b5.cloudfunctions.net/exports-getFcnt?uid=${id}`
+      `https://asia-northeast1-dreammatch-c9d8c.cloudfunctions.net/exports-getFcnt?uid=${id}`
     )
     return await res.json()
   },
@@ -186,7 +186,7 @@ export const actions = {
   },
   async getPosts({ commit }, { uid, page }) {
     const res = await fetch(
-      `https://asia-northeast1-snstest-9f2b5.cloudfunctions.net/exports-getUserPost?per=50&page=${
+      `https://asia-northeast1-dreammatch-c9d8c.cloudfunctions.net/exports-getUserPost?per=50&page=${
         page || 0
       }&uid=${uid}`
     )

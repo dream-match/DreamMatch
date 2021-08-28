@@ -26,7 +26,7 @@ export default ({ $fire, store }, inject) => {
           class: LinkTool,
           config: {
             endpoint:
-              'https://asia-northeast1-snstest-9f2b5.cloudfunctions.net/exports-getOgp',
+              'https://asia-northeast1-dreammatch-c9d8c.cloudfunctions.net/exports-getOgp',
           },
         },
         image: {

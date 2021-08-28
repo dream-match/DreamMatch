@@ -23,8 +23,13 @@
 
       <v-icon>mdi-lead-pencil</v-icon>
     </v-btn>
+    <v-btn to="/messages">
+      <span>Chat</span>
 
-    <v-btn to="setting">
+      <v-icon>mdi-forum</v-icon>
+    </v-btn>
+
+    <v-btn to="/setting">
       <span>Setting</span>
 
       <v-icon>mdi-cog</v-icon>
@@ -46,6 +51,8 @@ export default {
           return 'brown'
         case 3:
           return 'indigo'
+        case 4:
+          return 'deep-purple'
         default:
           return 'blue-grey'
       }

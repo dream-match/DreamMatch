@@ -23,6 +23,9 @@
       <v-list-item nuxt to="/post">
         <v-icon>mdi-fountain-pen-tip</v-icon>
       </v-list-item>
+      <v-list-item nuxt to="/messages">
+        <v-icon>mdi-forum </v-icon>
+      </v-list-item>
       <v-list-item nuxt to="/setting">
         <v-icon>mdi-cog</v-icon>
       </v-list-item>

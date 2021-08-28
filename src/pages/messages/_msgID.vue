@@ -23,7 +23,7 @@
               py-3
             "
           />
-          <div class="absolute right-0 items-center inset-y-0 hidden sm:flex">
+          <div class="absolute right-0 items-center inset-y-0 flex">
             <input
               ref="input"
               type="file"

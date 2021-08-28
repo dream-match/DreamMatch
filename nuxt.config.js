@@ -3,8 +3,8 @@ export default {
   target: 'static',
 
   head: {
-    titleTemplate: '%s - sns',
-    title: 'sns',
+    titleTemplate: '%s ',
+    title: 'DreamMatch',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -56,6 +56,14 @@ export default {
   pwa: {
     manifest: {
       lang: 'ja',
+    },
+    meta: {
+      name: 'DreamMatch',
+      author: 'いなりずし',
+      description: '夢をつなげます',
+      theme_color: '#696969',
+      lang: 'ja',
+      ogHost: '',
     },
   },
 
