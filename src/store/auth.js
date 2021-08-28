@@ -34,6 +34,10 @@ export const actions = {
         await this.$fire.auth.createUserWithEmailAndPassword(mail, pass)
       const { uid, photoURL, email, displayName } = userCredential.user
       commit('setUser', { uid, photoURL, email, name: displayName })
+      await this.$fire.firestore
+        .collection('users')
+        .doc(uid)
+        .set({ name: displayName || '未登録' }, { merge: true })
       commit('addRegisterStep')
     } catch (e) {
       commit('setErrorCode', e.code)
@@ -44,12 +48,19 @@ export const actions = {
       const provider = new this.$fireModule.auth.GoogleAuthProvider()
       const userCredential = await this.$fire.auth.signInWithPopup(provider)
       const { uid, photoURL, email, displayName } = userCredential.user
+
       commit('setUser', { uid, photoURL, email, name: displayName })
+
+      await this.$fire.firestore
+        .collection('users')
+        .doc(uid)
+        .set({ name: displayName || '未登録' }, { merge: true })
       commit('addRegisterStep')
     } catch (e) {
       commit('setErrorCode', e.code)
     }
   },
+
   async registerProf({ commit, state }, input) {
     try {
       const user = this.$fire.auth.currentUser

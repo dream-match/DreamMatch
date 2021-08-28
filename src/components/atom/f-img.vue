@@ -4,11 +4,11 @@
       :src="src"
       :lazy-src="lazySrc"
       :height="height"
-      :to="to"
       :max-height="maxHeight"
       :min-height="minHeight"
       :contain="contain"
       :width="width"
+      :max-width="maxWidth"
     >
       <slot />
     </v-img>
@@ -19,11 +19,11 @@ export default {
   props: {
     path: { type: String, default: '' },
     height: { type: String, default: null },
-    to: { type: String, default: '' },
     maxHeight: { type: String, default: null },
     minHeight: { type: String, default: null },
     width: { type: String, default: null },
     contain: { type: Boolean, default: false },
+    maxWidth: { type: String, default: '' },
   },
   data: () => ({ src: '', lazySrc: '' }),
   computed: {
@@ -63,7 +63,9 @@ export default {
       },
     },
   },
-
+  mounted() {
+    console.log(this.to)
+  },
   methods: {
     async getResizedUrl(v) {
       const pathAry = v.split('/')

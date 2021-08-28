@@ -73,6 +73,7 @@
 </template>
 <script>
 export default {
+  middleware: 'login',
   data: () => ({ input: '', sending: false, file: null, messages: [] }),
 
   async mounted() {

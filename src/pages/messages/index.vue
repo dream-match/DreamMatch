@@ -20,9 +20,8 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import fImg from '~//components/atom/f-img.vue'
 export default {
-  components: { fImg },
+  middleware: 'login',
   computed: {
     ...mapState('message', ['chats']),
   },

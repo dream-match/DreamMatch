@@ -1,16 +1,26 @@
 <template>
-  <v-card class="mx-auto" max-width="900" flat>
-    <f-img :path="post.titleImgPath" max-height="280" class="relative">
-      <div :class="[post.titleImgPath ? ' inline-block ' : '']">
+  <v-card
+    class="mx-auto"
+    max-width="900"
+    flat
+    @click="push(`/posts/${post.id}`)"
+  >
+    <f-img
+      :path="post.titleImgPath"
+      :to="`/posts/${post.id}`"
+      height="280"
+      class="relative"
+    >
+      <div :class="[post.titleImgPath ? ' inline-block ' : '']" class="z-30">
         <v-card-title
           class="bg-gray-800 text-white pa-2"
           :class="[post.titleImgPath ? 'rounded-br-lg' : '']"
         >
-          <nuxt-link :to="`/users/${post.user.uid}`">
+          <div @click.stop="push(`/users/${post.user.uid}`)">
             <v-avatar class="mr-2" size="36" color="blue-grey lighten-3">
               <f-img :path="post.user.uploadedPhotoPath" />
             </v-avatar>
-          </nuxt-link>
+          </div>
 
           {{ post.user.displayName }}
           <span class="font-weight-regular text-body-1 ml-2">
@@ -19,7 +29,7 @@
         </v-card-title>
       </div>
       <div
-        class="bottom-0 left-0 bg-gray-800 text-white"
+        class="bottom-0 left-0 bg-gray-800 text-white z-30"
         :class="[
           post.titleImgPath
             ? subtitle.length > 80
@@ -30,7 +40,7 @@
         ]"
       >
         <v-list-item>
-          <nuxt-link :to="`/posts/${post.id}`" class="white--text">
+          <div class="white--text" @click.stop="push(`/posts/${post.id}`)">
             <v-card-title>{{ post.title }} </v-card-title>
             <v-card-subtitle class="text-caption max-w-md">
               <v-chip v-for="tag in tags" :key="tag" x-small class="mr-1">
@@ -38,12 +48,9 @@
               </v-chip>
               {{ subtitle }}
             </v-card-subtitle>
-          </nuxt-link>
+          </div>
           <v-spacer />
-          <v-list-item-action
-            v-if="$vuetify.breakpoint.xs"
-            class="bg-gray-800 p-2"
-          >
+          <v-list-item-action v-if="$vuetify.breakpoint.xs" class="bg-gray-800">
             <v-btn icon :href="getTweetPath">
               <v-icon color="white"> mdi-twitter </v-icon>
             </v-btn>
@@ -62,7 +69,7 @@
 
       <v-card-actions
         v-if="!$vuetify.breakpoint.xs"
-        class="absolute bottom-0 right-0 bg-gray-800 rounded-tl-lg"
+        class="absolute bottom-0 right-0 bg-gray-800 rounded-tl-lg z-30"
       >
         <v-btn icon :href="getTweetPath">
           <v-icon color="white"> mdi-twitter </v-icon>
@@ -70,7 +77,7 @@
         <v-btn
           v-if="content.blocks.length && !isStartOpen"
           icon
-          @click="maContent"
+          @click.stop="maContent"
         >
           <v-icon color="white">
             {{ isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
@@ -86,14 +93,12 @@
   </v-card>
 </template>
 <script>
-import fImg from './f-img.vue'
 export default {
-  components: { fImg },
   props: {
     post: { type: Object, required: true },
     isStartOpen: { type: Boolean, default: false },
   },
-  data: () => ({ isOpen: false }),
+  data: () => ({ isOpen: false, clickRoot: false }),
 
   computed: {
     isSmallWin() {
@@ -121,9 +126,7 @@ export default {
       }
     },
     getTweetPath() {
-      return `https://twitter.com/intent/tweet?url=${
-        location.origin + this.$route.path
-      }&hashtags=DreamMatch`
+      return `https://twitter.com/intent/tweet?url=${location.origin}/posts/${this.post.id}&hashtags=DreamMatch`
     },
     tags() {
       return [...Object.keys(this.post.tags)]
@@ -132,6 +135,9 @@ export default {
   methods: {
     maContent() {
       this.isOpen = !this.isOpen
+    },
+    push(to) {
+      this.$router.push(to)
     },
   },
 }

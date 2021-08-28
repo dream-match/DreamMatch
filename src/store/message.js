@@ -56,7 +56,7 @@ export const actions = {
           .get()
         const { uploadedPhotoPath, name } = res.data()
         chat = await dispatch('createChat', {
-          name,
+          name: `${name}と${this.rootState.userData.displayName}`,
           imagePath: uploadedPhotoPath,
           uids: [uid, rootState.userData.uid],
         })

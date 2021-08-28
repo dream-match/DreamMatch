@@ -16,7 +16,11 @@
         v-text="text"
       ></div>
     </div>
-    <div class="stamp"><f-img :path="message.image" /></div>
+    <div class="stamp ml-16">
+      <v-card>
+        <f-img :path="message.image" max-width="350" contain />
+      </v-card>
+    </div>
   </div>
   <div v-else class="line__right">
     <div
@@ -24,7 +28,11 @@
       style="white-space: pre-wrap"
       v-text="text"
     ></div>
-    <div class="stamp"><f-img :path="message.image" /></div>
+    <div class="stamp">
+      <v-card>
+        <f-img :path="message.image" max-width="350" contain />
+      </v-card>
+    </div>
   </div>
 </template>
 <script>

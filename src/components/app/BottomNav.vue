@@ -9,29 +9,22 @@
   >
     <v-btn to="/">
       <span>Home</span>
-
       <v-icon>mdi-home</v-icon>
     </v-btn>
-
     <v-btn to="/search">
       <span>Search</span>
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
-
     <v-btn to="/post">
       <span>Write</span>
-
-      <v-icon>mdi-lead-pencil</v-icon>
+      <v-icon small>mdi-lead-pencil</v-icon>
     </v-btn>
     <v-btn to="/messages">
       <span>Chat</span>
-
       <v-icon>mdi-forum</v-icon>
     </v-btn>
-
     <v-btn to="/setting">
       <span>Setting</span>
-
       <v-icon>mdi-cog</v-icon>
     </v-btn>
   </v-bottom-navigation>

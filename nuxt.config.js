@@ -63,7 +63,8 @@ export default {
       description: '夢をつなげます',
       theme_color: '#696969',
       lang: 'ja',
-      ogHost: '',
+      ogHost: 'https://dreammatch-c9d8c.web.app/',
+      ogImage: 'https://dreammatch-c9d8c.web.app/icon.png',
     },
   },
 
@@ -89,6 +90,9 @@ export default {
         //  emulatorHost: "localhost"
       },
       storage: true,
+      analytics: {
+        collectionEnabled: true, // default
+      },
     },
   },
   vuetify: {
