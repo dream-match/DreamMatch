@@ -1,6 +1,6 @@
 // import colors from 'vuetify/lib/util/colors'
 export default {
-  target: 'ssr',
+  target: 'static',
 
   head: {
     titleTemplate: '%s - sns',
@@ -16,7 +16,18 @@ export default {
 
   css: ['@/assets/main.scss'],
 
-  plugins: ['~/plugins/init', { src: '~/plugins/editor', mode: 'client' }],
+  build: {
+    terser: {
+      terserOptions: {
+        compress: { drop_console: true },
+      },
+    },
+  },
+  plugins: [
+    { src: '~/plugins/init', mode: 'client' },
+    { src: '~/plugins/editor', mode: 'client' },
+    { src: '~/plugins/vuefire', mode: 'client' },
+  ],
   generate: {
     fallback: true,
   },
@@ -62,9 +73,7 @@ export default {
     services: {
       auth: {
         // emulatorPort: process.env.NODE_ENV === 'development' && useE ? 9099 : undefined,
-
         // onAuthStateChangedMutation: 'auth/ON_AUTH_STATE_CHANGED_MUTATION',
-        onAuthStateChangedAction: 'getUserData',
       },
       firestore: {
         enablePersistence: true,
@@ -77,6 +86,4 @@ export default {
   vuetify: {
     theme: { dark: true },
   },
-
-  build: {},
 }

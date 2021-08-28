@@ -40,5 +40,11 @@ service cloud.firestore {
          allow read:if true;
       }
     }
+    match /chats/{chatId}{
+      allow write,read:if true;
+      match /messages/{id}{
+         allow write,read:if true;
+      }
+    }
   }
 }

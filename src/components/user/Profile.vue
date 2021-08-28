@@ -26,6 +26,7 @@
               <v-btn v-if="userData.url" icon :href="userData.url">
                 <v-icon>mdi-palette</v-icon>
               </v-btn>
+
               <v-btn outlined to="/setting">プロフィール編集</v-btn>
             </div>
             <div v-else>
@@ -38,6 +39,12 @@
                 </v-btn>
                 <v-btn v-if="userData.url" icon :href="userData.url">
                   <v-icon>mdi-palette</v-icon>
+                </v-btn>
+                <v-btn
+                  icon
+                  @click="$store.dispatch(`message/joinWith`, userData.uid)"
+                >
+                  <v-icon>mdi-android-messages</v-icon>
                 </v-btn>
                 <v-btn v-if="isFollow" outlined @click="unFollow">
                   フォロー中

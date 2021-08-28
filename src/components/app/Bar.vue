@@ -15,7 +15,11 @@
     </nuxt-link>
     <v-toolbar-title class="font-weight-black">{{ title }}</v-toolbar-title>
     <v-spacer />
-    <v-btn v-show="!$store.state.isLogin" text to="/login">
+
+    <UserCreateChat v-if="isMessages" />
+    <UserJoinChannel v-if="isMessages" />
+
+    <v-btn v-show="!$store.state.isLogin" text to="/register">
       登録・ログイン
     </v-btn>
   </v-app-bar>
@@ -47,6 +51,9 @@ export default {
     },
     isTweets() {
       return this.$route.path.includes('/posts')
+    },
+    isMessages() {
+      return this.$route.path === '/messages'
     },
     drawer: {
       get() {
