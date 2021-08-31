@@ -32,7 +32,9 @@ export default {
   data: () => ({ isisFollower: false, isFollowing: false }),
   computed: {
     skills() {
-      return [...Object.keys(this.userData.skills)]
+      return Array.isArray(this.userData.skills)
+        ? this.userData.skills
+        : [...Object.keys(this.userData.skills)]
     },
   },
   async mounted() {

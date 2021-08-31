@@ -122,7 +122,7 @@ export const actions = {
           .get(),
       ])
     ).map((users) => users.docs.map((doc) => doc.data()))
-
+    console.log(follower)
     return { follower, following }
   },
 

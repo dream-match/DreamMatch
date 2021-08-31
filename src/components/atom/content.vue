@@ -18,20 +18,26 @@ export default {
   background-color: #1f2937;
   @apply p-2;
   h1 {
+    font-weight: bold;
     font-size: 2.5rem;
+    margin-bottom: 1rem;
     border-bottom: 2px solid;
-    &::first-letter {
-      font-size: 1.25em;
-    }
   }
 
   h2 {
+    font-weight: bold;
+    margin-bottom: 1rem;
     font-size: 2.125rem;
   }
+
   h3 {
+    font-weight: bold;
+    margin-bottom: 1rem;
     font-size: 1.5rem;
   }
   h4 {
+    font-weight: bold;
+    margin-bottom: 1rem;
     font-size: 1.25rem;
   }
   pre {

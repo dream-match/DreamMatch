@@ -63,9 +63,7 @@ export default {
       },
     },
   },
-  mounted() {
-    console.log(this.to)
-  },
+
   methods: {
     async getResizedUrl(v) {
       const pathAry = v.split('/')
